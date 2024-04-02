@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Clicker" representedClassName="Clicker" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="increaseNumber" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="reduceNumber" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="color" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserColor" inverseName="clickers" inverseEntity="UserColor"/>
+        <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClickerType" inverseName="clickers" inverseEntity="ClickerType"/>
+    </entity>
+    <entity name="ClickerType" representedClassName="ClickerType" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="clickers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clicker" inverseName="types" inverseEntity="Clicker"/>
+        <relationship name="color" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserColor" inverseName="types" inverseEntity="UserColor"/>
+    </entity>
+    <entity name="UserColor" representedClassName="UserColor" syncable="YES" codeGenerationType="class">
+        <attribute name="blue" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="green" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="red" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="clickers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clicker" inverseName="color" inverseEntity="Clicker"/>
+        <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClickerType" inverseName="color" inverseEntity="ClickerType"/>
+    </entity>
+</model>
