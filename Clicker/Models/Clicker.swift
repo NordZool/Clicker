@@ -3,7 +3,7 @@ import CoreData
 //static functions
 extension Clicker{
     //only for preview!!
-    static func oneClicker(context: NSManagedObjectContext, withCustomColor:Bool = false) -> Clicker {
+    @discardableResult static func oneClicker(context: NSManagedObjectContext, withCustomColor:Bool = false) -> Clicker {
         let clicker = Clicker(context: context)
         clicker.timestamp = Date.now
         clicker.name = "Preview Clicker"
@@ -23,7 +23,7 @@ extension Clicker{
     }
     
     //only for preview
-    static func clickers(context: NSManagedObjectContext,_ count:Int, _ withCustomColor:Bool = false) -> [Clicker] {
+    @discardableResult static func clickers(context: NSManagedObjectContext,_ count:Int, _ withCustomColor:Bool = false) -> [Clicker] {
         var clickers: [Clicker] = []
         for _ in 0...count {
             let clicker = oneClicker(context: context, withCustomColor: withCustomColor)
@@ -43,7 +43,7 @@ extension Clicker{
     
     
     
-    static func copyForEditiong(of clicker: Clicker, in context:NSManagedObjectContext) -> Clicker{
+    static func copyForEdition(of clicker: Clicker, in context:NSManagedObjectContext) -> Clicker{
         guard let object = try? context.existingObject(with: clicker.objectID) as? Clicker else {
             fatalError("Copy clicker error")
         }

@@ -20,6 +20,7 @@
         <attribute name="blue" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="green" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="red" attributeType="Double" maxValueString="255" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="clickers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clicker" inverseName="color" inverseEntity="Clicker"/>
         <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClickerType" inverseName="color" inverseEntity="ClickerType"/>
     </entity>

@@ -10,7 +10,7 @@ import CoreData
 
 struct ClickerView: View {
     @ObservedObject var clicker: Clicker
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     var body: some View {
         VStack {
             VStack(alignment:.center, spacing: 10) {
@@ -25,7 +25,7 @@ struct ClickerView: View {
             }
             .padding(4)
             .frame(width: settings.itemSize,height: settings.itemSize)
-            .background((clicker.color?.UIColor ?? .gray))
+            .background((clicker.color?.UIColor ??  Color(uiColor: .systemBackground)))
         }
     
     }

@@ -7,15 +7,21 @@ class ClickerEditViewModel : ObservableObject {
     
     //if view is Edit - clicker isn't nil
     //else it is Add view - create new empty clicker
-    init(_ context: NSManagedObjectContext, clicker: Clicker? = nil) {
+    init(context: NSManagedObjectContext, clicker: Clicker? = nil) {
         self.context = context
         
         if let clicker = clicker {
-            self.clicker = Clicker.copyForEditiong(of: clicker, in: context)
+            self.clicker = Clicker.copyForEdition(of: clicker, in: context)
         } else {
             self.clicker = Clicker.emptyClicker(context: context)
         }
         
+    }
+    
+    var childContext: NSManagedObjectContext {
+        let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        childContext.parent = context
+        return childContext
     }
     
     func rollBack() {

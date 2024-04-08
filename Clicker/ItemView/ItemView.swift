@@ -18,6 +18,9 @@ struct ItemView<Item>: View where Item:NSManagedObject {
         case let clickerType as ClickerType:
             TypeView(type: clickerType)
                 .abstractModifier()
+        case let color as UserColor:
+            ColorView(color: color)
+                .abstractModifier()
         default:
             Text("Error 🥲")
         }
@@ -27,7 +30,7 @@ struct ItemView<Item>: View where Item:NSManagedObject {
 #Preview {
     let context: NSManagedObjectContext = PersistenceController(inMemory: true).container.viewContext
     
-    return ItemView(item: Clicker.oneClicker(context: context,withCustomColor: true))
+    return ItemView(item: UserColor.oneUserColor(context))
         .environmentObject(Settings())
         .environment(\.managedObjectContext, context)
 }

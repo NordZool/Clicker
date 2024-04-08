@@ -47,14 +47,11 @@ struct ClickerEditView: View {
             }
             Section("Other") {
                 NavigationLink("Categories") {
-                    CategoriesView(context: viewModel.context, clicker: viewModel.clicker)
-                    
+                    CategoriesView( clicker:viewModel.clicker)
                 }
                 
                 NavigationLink("Color") {
-//                    GridView(items: [], onItemTap: { _ in
-//                        
-//                    }, editMenuType: .color)
+                    ColorChangeView(item: viewModel.clicker)
                 }
             }
            
@@ -65,13 +62,14 @@ struct ClickerEditView: View {
 
 
 #Preview {
-    let persistence = PersistenceController(inMemory: true)
+    let persistence = PersistenceController.shared
     let viewContext = persistence.container.viewContext
     let clicker = Clicker.oneClicker(context: viewContext)
+    UserColor.tenUserColors(viewContext)
     clicker.addToTypes(ClickerType.oneClickerType(context: viewContext))
-    try? viewContext.save()
+//    try? viewContext.save()
 
-    return NavigationStack { ClickerEditView(viewModel: .init(viewContext, clicker:clicker))
+    return NavigationStack { ClickerEditView(viewModel: .init(context:viewContext, clicker:clicker))
             .navigationTitle("Clicker")
     }
     .environment(\.managedObjectContext, viewContext)

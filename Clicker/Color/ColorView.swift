@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct ColorView: View {
+    @EnvironmentObject private var settings:Settings
+    @ObservedObject var color: UserColor
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        color.UIColor
+            .frame(width: settings.itemSize, height: settings.itemSize)
     }
 }
 
 #Preview {
-    ColorView()
+    let persistence = PersistenceController(inMemory: true)
+    let viewContext = persistence.container.viewContext
+    let color = UserColor.oneUserColor(viewContext)
+    return ColorView(color: color)
+        .environmentObject(Settings())
+        .environment(\.managedObjectContext, viewContext)
+        .abstractModifier()
 }

@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct TypeView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var type: ClickerType
     
     var body: some View {
-        ZStack(alignment:.topTrailing) {
             Text(type.name ?? "Test")
                 .fontWeight(.medium)
                 .frame(width: settings.itemSize, height: settings.itemSize)
-                .background(type.color?.UIColor ?? .gray)
-                
-        }
+                .background(type.color?.UIColor ?? Color(uiColor: .systemBackground))
     }
 }
 

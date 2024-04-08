@@ -8,26 +8,29 @@
 import SwiftUI
 import CoreData
 
-struct AddView<T:NSManagedObject>: View {
+struct EditView<T:NSManagedObject>: View {
     @Environment(\.dismiss) var dismiss
 
   
     let contextForAdd:NSManagedObjectContext
-    //it's only for identify a kind of type
+    //it's only for identify a kind of item type
+    //cannot use item in switch because sometimes
+    //it can be nil
     let editMenuType: EditmenuType
+    let item:T?
     
-    init(editMenuType: EditmenuType,_ context:NSManagedObjectContext? = nil,_ percictence: PersistenceController? = nil) {
+    init(editMenuType: EditmenuType,item:T? = nil, _ context:NSManagedObjectContext? = nil) {
         self.editMenuType = editMenuType
+        self.item = item
         
         //if we in edit view, and trying to work in another edit view
+        //in add view always been childViewContext
         if let context = context {
             let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
             childContext.parent = context
             self.contextForAdd = childContext
             
             //if we just open an edit view
-        }else if let percictence = percictence {
-            self.contextForAdd = percictence.childViewContext
         } else {
             self.contextForAdd = PersistenceController.shared.childViewContext
         }
@@ -40,13 +43,18 @@ struct AddView<T:NSManagedObject>: View {
             Group {
                 switch editMenuType {
                 case .clicker:
-                    ClickerEditView(viewModel: .init(contextForAdd))
+                    ClickerEditView(viewModel:.init(context:contextForAdd,
+                                                    clicker: item as? Clicker))
                         .navigationTitle("Clicker")
                 case .clickerType:
-                    Text("type")
+                    ClickerTypeEditView(viewModel: .init(context: contextForAdd,
+                                                        type: item as? ClickerType))
                         .navigationTitle("Type")
-                default:
-                    Text("another")
+                case .color:
+                    ColorEditView(viewModel: .init(context: contextForAdd,
+                                                  color: item as? UserColor))
+                        .navigationTitle("Color")
+               
                 }
             }
                 .toolbar {
@@ -81,9 +89,10 @@ struct AddView<T:NSManagedObject>: View {
 
 #Preview {
     //говно не тестится, если не использовать общий персистенс
-    let persistence = PersistenceController(inMemory: true)
+//    let persistence = PersistenceController(inMemory: true)
+    let persistence = PersistenceController.shared
     let context = persistence.container.viewContext
-    return AddView(editMenuType: .clicker,nil, persistence)
+    return EditView(editMenuType: .clicker,nil)
         .environment(\.managedObjectContext, context)
         .environmentObject(Settings())
 }

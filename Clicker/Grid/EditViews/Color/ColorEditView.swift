@@ -10,24 +10,67 @@ import CoreData
 
 //when appen button pressed
 struct ColorEditView: View {
-    let context:NSManagedObjectContext
-//    @FetchRequest(entity: ClickerType.entity(), sortDescriptors:
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: true)])
-    var notRelatedClickerTypes: FetchedResults<UserColor>
+    @StateObject var viewModel: ColorEditViewModel
+    
     
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            ItemView(item: viewModel.color)
+                .padding(.bottom,10)
+            //new Vstack only for sliders' spacing
+            VStack(spacing:40) {
+                HStack {
+                    ColorIndexView(color: .red)
+                    
+                    Slider(value: $viewModel.color.red, in: (0.0)...(255.0)) {
+                        Text("Red")
+                    }
+                    .tint(.red)
+                }
+                
+                HStack {
+                    ColorIndexView(color: .blue)
+                    Slider(value: $viewModel.color.blue, in: (0.0)...(255.0)) {
+                        Text("Blue")
+                    }
+                    .tint(.blue)
+                }
+                HStack {
+                    
+                    ColorIndexView(color: .green)
+                    Slider(value: $viewModel.color.green, in: (0.0)...(255.0)) {
+                        Text("Green")
+                    }
+                    .tint(.green)
+                }
+            }
+            Spacer()
+        }
+        .padding(.horizontal,30)
+    }
+    
+    private struct ColorIndexView: View {
+        let color: Color
+        
+        var body: some View {
+            Circle()
+                .fill(color)
+                .frame(width: 30)
+        }
     }
 }
 
 #Preview {
     let persistence = PersistenceController(inMemory: true)
-    UserColor.oneUserColor(persistence.container.viewContext)
-
+    
+    let deepContext = persistence.childViewContext
+    let color = UserColor.oneUserColor(persistence.container.viewContext)
+    try? persistence.container.viewContext.save()
+    let existingColor = UserColor.copyForEdition(of: color, in: deepContext)
 //    let viewContext = persistence.container.viewContext
     
-    return ColorEditView(context: persistence.childViewContext)
+    return ColorEditView(viewModel: .init(context: persistence.container.viewContext,color: existingColor))
         .environment(\.managedObjectContext, persistence.container.viewContext)
         .environmentObject(Settings())
 }

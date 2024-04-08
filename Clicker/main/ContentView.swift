@@ -27,19 +27,28 @@ struct ContentView: View {
             }, editMenuType: .clicker,
             appearAddButton: true)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button("Delete Test") {
+//                        let context = persistence.container.viewContext
+//                        let testObject = try! context.fetch(Clicker.fetchRequest()).first(where: {$0.name == "Test"})!
+//                        context.delete(testObject)
+//                    }
+//                }
+//                ToolbarItem {
+//                    Button("find Test") {
+//                        let context = persistence.container.viewContext
+//                        let findObject = try? context.fetch(Clicker.fetchRequest()).first(where: {$0.name == "Test"})
+//                        if let object = findObject {
+//                            print("I find him: \(object)")
+//                        } else {
+//                            print("Not found")
+//                        }
+//                    }
+//                }
                 ToolbarItem(placement: .bottomBar) {
                     ClickerTabView(screenInView: $currenctScreen)
                 }
             }
-            Text("Select an item")
         }
     }
 
@@ -85,4 +94,11 @@ private let itemFormatter: DateFormatter = {
 #Preview {
     ContentView(persistence: PersistenceController.shared).environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .environmentObject(Settings())
+        .onAppear {
+//            let ReqVar = NSFetchRequest(entityName: "Clicker")
+//                let DelAllReqVar = NSBatchDeleteRequest(fetchRequest: ReqVar)
+//                do { try ContxtVar.executeRequest(DelAllReqVar) }
+//                catch { print(error) }
+        }
+       
 }

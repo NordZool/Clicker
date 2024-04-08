@@ -15,8 +15,6 @@ struct CategoriesView: View {
     var notRelatedClickerTypes: FetchedResults<ClickerType>
     //only for trigger animate, value is not matter
     @State private var animate: Bool = true
-    
-    let context: NSManagedObjectContext
     @ObservedObject var clicker: Clicker
     
     var body: some View {
@@ -26,7 +24,7 @@ struct CategoriesView: View {
                 let type = object as! ClickerType
                 clicker.removeFromTypes(type)
                 animate.toggle()
-            }, editMenuType: .clickerType, appearAddButton: false, context: context)
+            }, editMenuType: .clickerType, appearAddButton: false)
             
             Divider()
             
@@ -35,12 +33,15 @@ struct CategoriesView: View {
                 !(((clicker.types as? Set<ClickerType>) ?? [])
                     .contains(where:{$0.objectID == type.objectID}))
             }, onItemTap: {object in
-                let type = object as! ClickerType
+                //isolate choosen color in item context
+                let clickerContext = clicker.managedObjectContext!
+                let type = ClickerType.copyForEdition(of: object as! ClickerType, in: clickerContext) 
+                
+                
                 clicker.addToTypes(type)
                 animate.toggle()
             }, editMenuType: .clickerType,
-                     appearAddButton: true,
-                     context: context
+                     appearAddButton: true
             )
 //            .animation(.interpolatingSpring(stiffness: 30, damping: 8, initialVelocity: 4))
             //            ForEach(notRelatedClickerTypes) {type in
@@ -69,15 +70,15 @@ struct CategoriesView: View {
             //            }
         }
         .animation(.interpolatingSpring(stiffness: 40, damping: 10, initialVelocity: 1), value: animate)
-        .onDisappear {
-            if context.hasChanges {
-                do {
-                    try context.save()
-                } catch {
-                    print("error during saving in Categories view: \(error)")
-                }
-            }
-        }
+//        .onDisappear {
+//            if context.hasChanges {
+//                do {
+//                    try context.save()
+//                } catch {
+//                    print("error during saving in Categories view: \(error)")
+//                }
+//            }
+//        }
         
     }
 }
@@ -88,7 +89,7 @@ struct CategoriesView: View {
     let clicker = Clicker.oneClicker(context: context)
     clicker.addToTypes(ClickerType.oneClickerType(context: context))
     
-    return CategoriesView(context: context, clicker: clicker)
+    return CategoriesView(clicker: clicker)
         .environmentObject(Settings())
         .environment(\.managedObjectContext, persistens.container.viewContext)
 }

@@ -10,13 +10,15 @@ import CoreData
 
 struct GridView<T:NSManagedObject & Identifiable>: View {
     @EnvironmentObject private var settings: Settings
-    @State private var isPresented = false
+    @State private var addViewIsPresented = false
+    //for present the editView
+    @State private var editableItem: T? = nil
     
     var items: [T]
     let onItemTap: (NSManagedObject) -> ()
     let editMenuType: EditmenuType
     let appearAddButton:Bool
-    //if it opening not from viewcontext
+    //this context shoud only be as viewContext or empty
     var context: NSManagedObjectContext?
     
     
@@ -28,12 +30,35 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                         .onTapGesture {
                             self.onItemTap(item)
                         }
+                        .contextMenu(menuItems: {
+                            Button {
+                                editableItem = item
+                            } label: {
+                                Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
+                            }
+                            
+                            
+
+                        })
+                        
+                        .sheet(item: $editableItem, 
+                               onDismiss: {editableItem = nil}) { item in
+                            EditView(editMenuType: editMenuType, item:item, context)
+                        }
+//                        .sheet(isPresented: $editViewIsPresented, content: {
+//                            EditView(editMenuType: editMenuType, item:item, context)
+//                                .onDisappear {
+//                                    editableItem = nil
+//                                }
+//                        })
+                        
                 }
                 
+    
                 //addButtonItem
                 if appearAddButton {
                     Button {
-                        isPresented = true
+                        addViewIsPresented = true
                     } label: {
                         Image(systemName: "plus")
                             .fontWeight(.bold)
@@ -43,8 +68,8 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                             .abstractModifier()
                     }
                     .buttonStyle(.plain)
-                    .sheet(isPresented: $isPresented, content: {
-                        AddView(editMenuType: editMenuType,context)
+                    .sheet(isPresented: $addViewIsPresented, content: {
+                        EditView(editMenuType: editMenuType,context)
                     })
                 }
                 
@@ -52,16 +77,17 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                 
                 
             })
-            .padding(.horizontal,10)
+            .padding(10)
+            
         }
     }
 }
 
 #Preview {
-    let persistence = PersistenceController(inMemory: true)
+    let persistence = PersistenceController.shared
     let context = persistence.container.viewContext
     return GridView(
-        items: Clicker.clickers(context: context, 7),
+        items: try! context.fetch(Clicker.fetchRequest()),
         onItemTap: {clicker in
         let clicker = clicker as! Clicker
 //        clicker.isActive = true
