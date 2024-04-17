@@ -10,7 +10,7 @@ import CoreData
 
 struct EditView<T:NSManagedObject>: View {
     @Environment(\.dismiss) var dismiss
-
+    //only for item != nil case
   
     let contextForAdd:NSManagedObjectContext
     //it's only for identify a kind of item type
@@ -34,6 +34,8 @@ struct EditView<T:NSManagedObject>: View {
         } else {
             self.contextForAdd = PersistenceController.shared.childViewContext
         }
+        
+        self.contextForAdd.automaticallyMergesChangesFromParent = true
     }
     
     var body: some View {
@@ -58,16 +60,29 @@ struct EditView<T:NSManagedObject>: View {
                 }
             }
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                            Button("Add"){
-                                try! contextForAdd.save()
-                                if let parentContext = contextForAdd.parent {
-                                    try! parentContext.save()
+                        ToolbarItem(placement: .topBarTrailing) {
+                            
+                            //if is a new item is "Add" lable
+                            //if is an existed item is "Save" lable
+                            Button(item == nil ? "Add" : "Save"){
+                                    save()
+                                    dismiss.callAsFunction()
                                 }
-                                dismiss.callAsFunction()
-                                
-                            }
-                            .font(.title3)
+                                .font(.title3)
+                        }
+            
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss.callAsFunction()
+                        } label: {
+                            Image(systemName: "multiply")
+                                .padding(6)
+                                .background(.gray.opacity(0.5))
+                                .contentShape(Circle())
+                                .containerShape(Circle())
+                        }
+                        .buttonStyle(.plain)
+
                     }
                     
 //                    ToolbarItem(placement: .bottomBar) {
@@ -84,6 +99,13 @@ struct EditView<T:NSManagedObject>: View {
         }
         
         
+    }
+    
+    func save() {
+        try! contextForAdd.save()
+        if let parentContext = contextForAdd.parent {
+            try! parentContext.save()
+        }
     }
 }
 
