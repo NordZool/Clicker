@@ -31,11 +31,13 @@ extension ClickerType {
 extension ClickerType {
     
     static func emptyClickerType(_ context:NSManagedObjectContext) -> ClickerType {
-        ClickerType(context: context)
+        let newClickerType = ClickerType(context: context)
+        newClickerType.timestamp = .now
+        return newClickerType
     }
     
     static func copyForEdition(of type: ClickerType, in context:NSManagedObjectContext) -> ClickerType{
-        guard let object = try? context.existingObject(with: type.objectID) as? ClickerType else {
+        guard let object = Functions.copyForEdition(of: type, in: context) as? ClickerType else {
             fatalError("Copy clicker error")
         }
         

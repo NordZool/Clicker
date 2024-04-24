@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClickerEditView: View {
     @StateObject var viewModel: ClickerEditViewModel
-    @State private var testObject: Clicker?
+    
 
     var body: some View {
         Form {

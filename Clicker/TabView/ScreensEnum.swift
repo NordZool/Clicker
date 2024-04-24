@@ -1,7 +1,8 @@
 import Foundation
 
-
-enum ScreensEnum {
-    case clickers
-    case graphic
+//rawValue = "systemImageString"
+enum ScreensEnum : String, CaseIterable{
+    case clickers = "list.bullet"
+    case graphic = "circle.filled.pattern.diagonalline.rectangle"
+    case settings = "gearshape.fill"
 }

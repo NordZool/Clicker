@@ -20,6 +20,7 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
     let appearAddButton:Bool
     //this context shoud only be as viewContext or empty
     var context: NSManagedObjectContext?
+  
     
     
     var body: some View {
@@ -31,30 +32,20 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                             self.onItemTap(item)
                         }
                         .contextMenu(menuItems: {
-                            Button {
-                                editableItem = item
-                            } label: {
-                                Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
-                            }
+                            ContextMenuView(editableItem: $editableItem, item: item)
                             
-                            
-
                         })
-                        
-                        .sheet(item: $editableItem, 
+                    
+                        .sheet(item: $editableItem,
                                onDismiss: {editableItem = nil}) { item in
                             EditView(editMenuType: editMenuType, item:item, context)
                         }
-//                        .sheet(isPresented: $editViewIsPresented, content: {
-//                            EditView(editMenuType: editMenuType, item:item, context)
-//                                .onDisappear {
-//                                    editableItem = nil
-//                                }
-//                        })
-                        
+                               
+                               
+                    
                 }
                 
-    
+                
                 //addButtonItem
                 if appearAddButton {
                     Button {
@@ -64,7 +55,7 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                             .fontWeight(.bold)
                             .font(.title)
                             .frame(width: settings.itemSize, height: settings.itemSize)
-                            .background(.gray)
+                            .background(.gray.opacity(0.5))
                             .abstractModifier()
                     }
                     .buttonStyle(.plain)
@@ -72,7 +63,7 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                         EditView(editMenuType: editMenuType,context)
                     })
                 }
-                
+                    
                 
                 
                 
@@ -89,9 +80,11 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
     return GridView(
         items: try! context.fetch(Clicker.fetchRequest()),
         onItemTap: {clicker in
-        let clicker = clicker as! Clicker
-//        clicker.isActive = true
+            let clicker = clicker as! Clicker
+            //        clicker.isActive = true
+          clicker.objectID
         }, editMenuType: .clicker, appearAddButton: true)
+    
     .environment(\.managedObjectContext, context)
     .environmentObject(Settings())
 }

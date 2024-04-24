@@ -26,36 +26,38 @@ struct ColorChangeView<T:Colorness>: View {
     
     
     var body: some View {
-        VStack {
-            if let color = item.color {
-                Button {
-                    item.color = nil
-                } label: {
-                    ItemView(item: color)
+        ScrollView {
+            LazyVStack {
+                if let color = item.color {
+                    Button {
+                        item.color = nil
+                    } label: {
+                        ItemView(item: color)
+                    }
+                    .buttonStyle(.plain)
+                    
+                } else {
+                    Image(systemName: "questionmark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: settings.itemSize  - 10, height: settings.itemSize - 10)
+                        .frame(width: settings.itemSize, height: settings.itemSize)
+                        .abstractModifier()
+                    
+                    
                 }
-                .buttonStyle(.plain)
+                Divider()
                 
-            } else {
-                Image(systemName: "questionmark")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: settings.itemSize  - 10, height: settings.itemSize - 10)
-                    .frame(width: settings.itemSize, height: settings.itemSize)
-                    .abstractModifier()
-                
-                
+                GridView(items: colors.map{$0}, onItemTap: { color in
+                    //isolate choosen color in item context
+                    let itemContext = item.managedObjectContext!
+                    let color = UserColor.copyForEdition(of: color as! UserColor, in: itemContext) 
+                    
+                    
+                    item.color = color
+                }, editMenuType: .color,
+                         appearAddButton: true)
             }
-            Divider()
-            
-            GridView(items: colors.map{$0}, onItemTap: { color in
-                //isolate choosen color in item context
-                let itemContext = item.managedObjectContext!
-                let color = UserColor.copyForEdition(of: color as! UserColor, in: itemContext) 
-                
-                
-                item.color = color
-            }, editMenuType: .color,
-                     appearAddButton: true)
         }
         //        .onDisappear(perform: {
         //            do {

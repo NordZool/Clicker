@@ -21,55 +21,35 @@ struct CategoriesView: View {
         ScrollView {
             GridView(items: clicker.typesArraySortedByDate(),
                      onItemTap: { object in
-                let type = object as! ClickerType
-                clicker.removeFromTypes(type)
+                self.tapOnActiveType(type: object as! ClickerType)
                 animate.toggle()
             }, editMenuType: .clickerType, appearAddButton: false)
             
-            Divider()
+            //user's guide
+            if (clicker.types as! Set<ClickerType> ).isEmpty {
+                Text("Tap on type to add it to clicker")
+                    .font(.title2)
+            }
+            Text((clicker.types as! Set<ClickerType> ).isEmpty ? "Long tap to edit" : "Tap on type to unbound it with clicker")
+                .font(.title3)
+                .foregroundStyle(.gray)
+            
+            Rectangle()
+                .frame(height: 3)
             
             //GridView with items, that not contains in clicker.types
             GridView(items: notRelatedClickerTypes.filter{type in
                 !(((clicker.types as? Set<ClickerType>) ?? [])
                     .contains(where:{$0.objectID == type.objectID}))
             }, onItemTap: {object in
-                //isolate choosen color in item context
-                let clickerContext = clicker.managedObjectContext!
-                let type = ClickerType.copyForEdition(of: object as! ClickerType, in: clickerContext) 
-                
-                
-                clicker.addToTypes(type)
+                self.tapOnUnactriveType(type: object as! ClickerType, in: clicker.managedObjectContext!)
+               
                 animate.toggle()
             }, editMenuType: .clickerType,
                      appearAddButton: true
             )
-//            .animation(.interpolatingSpring(stiffness: 30, damping: 8, initialVelocity: 4))
-            //            ForEach(notRelatedClickerTypes) {type in
-            //                Text(String(!(((clicker.types as? Set<ClickerType>) ?? []).contains(where: {$0.objectID == type.objectID}))))
-            //            }
-            //            Button("Save") {
-            //                if context.hasChanges {
-            //                    do {
-            //                        try context.save()
-            //                    } catch {
-            //                        print("error during saving in Categories view: \(error)")
-            //                    }
-            //                }
-            //            }
-            //            Button("Create type") {
-            //                let new = ClickerType.oneClickerType(context: context)
-            //                new.name = "последний"
-            //                do {
-            //                    try context.save()
-            //                    if let parent = context.parent {
-            //                        try parent.save()
-            //                    }
-            //                } catch {
-            //                    print(error)
-            //                }
-            //            }
         }
-        .animation(.interpolatingSpring(stiffness: 40, damping: 10, initialVelocity: 1), value: animate)
+        .animation(Resourses.gridAnimation, value: animate)
 //        .onDisappear {
 //            if context.hasChanges {
 //                do {
@@ -81,13 +61,32 @@ struct CategoriesView: View {
 //        }
         
     }
+    
+    func tapOnUnactriveType(type: ClickerType, in context: NSManagedObjectContext) {
+        //isolate choosen type in clicker context
+        let type = ClickerType.copyForEdition(of: type, in: context)
+        //for move it in the end of the list
+        type.timestamp = .now
+        
+        clicker.addToTypes(type)
+    }
+    
+    private func tapOnActiveType(type: ClickerType) {
+        clicker.removeFromTypes(type)
+        //for move it in the end of the list
+        type.timestamp = .now
+        
+    }
 }
 
 #Preview {
-    let persistens = PersistenceController(inMemory: false)
-    let context = persistens.childViewContext
+    let persistens = PersistenceController(inMemory: true)
+    let context = persistens.container.viewContext
     let clicker = Clicker.oneClicker(context: context)
-    clicker.addToTypes(ClickerType.oneClickerType(context: context))
+    for _ in 0...10 {
+        
+        clicker.addToTypes(ClickerType.oneClickerType(context: context))
+    }
     
     return CategoriesView(clicker: clicker)
         .environmentObject(Settings())

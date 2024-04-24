@@ -44,7 +44,7 @@ extension Clicker{
     
     
     static func copyForEdition(of clicker: Clicker, in context:NSManagedObjectContext) -> Clicker{
-        guard let object = try? context.existingObject(with: clicker.objectID) as? Clicker else {
+        guard let object = Functions.copyForEdition(of: clicker, in: context) as? Clicker else {
             fatalError("Copy clicker error")
         }
         
@@ -61,5 +61,13 @@ extension Clicker {
         (self.types as? Set<ClickerType>)?
             .sorted(by: {$0.timestamp ?? .now < $1.timestamp ?? .now})
         ?? []
+    }
+    
+    func increaseOperation() {
+        self.amount += Int64(self.increaseNumber)
+    }
+    
+    func reduceOperation() {
+        self.amount -= Int64(self.reduceNumber)
     }
 }

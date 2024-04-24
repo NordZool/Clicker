@@ -37,7 +37,7 @@ extension UserColor {
     }
     
     static func copyForEdition(of color: UserColor, in context:NSManagedObjectContext) -> UserColor{
-        guard let object = try? context.existingObject(with: color.objectID) as? UserColor else {
+        guard let object = Functions.copyForEdition(of: color, in: context) as? UserColor else {
             fatalError("Copy color error")
         }
         

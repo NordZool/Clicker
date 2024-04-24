@@ -21,7 +21,6 @@ struct ClickerTabViewBar: View {
                     } label: {
                         Image(systemName: screenEnumCase.rawValue)
                     }
-                    .tag(screenEnumCase)
                     .foregroundStyle(screenInView == screenEnumCase ? Color.primary : .secondary)
                     .scaleEffect(1.5)
                     Spacer()

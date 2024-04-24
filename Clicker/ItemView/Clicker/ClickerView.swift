@@ -26,6 +26,10 @@ struct ClickerView: View {
             .padding(4)
             .frame(width: settings.itemSize,height: settings.itemSize)
             .background((clicker.color?.UIColor ??  Color(uiColor: .systemBackground)))
+            
+            //if clicker  isActive
+//            .opacity(clicker.isActive ? 0.5 : 1)
+//            .animation(.linear(duration:0.2), value: clicker.isActive)
         }
     
     }
