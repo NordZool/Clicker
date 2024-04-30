@@ -1,0 +1,34 @@
+//
+//  InactiveClickersTableView.swift
+//  Clicker
+//
+//  Created by admin on 17.04.24.
+//
+
+import SwiftUI
+
+struct InactiveClickersTableView: View {
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Clicker.timestamp, ascending: true)],
+        predicate: NSPredicate(format: "isActive == %@", NSNumber(value: false)),
+        animation: .linear)
+    private var clickers: FetchedResults<Clicker>
+    @Binding var animate: Bool
+    
+    var body: some View {
+        GridView(items: clickers.map({$0}), onItemTap: { object in
+            let clicker = object as! Clicker
+            clicker.isActive = true
+            clicker.timestamp = .now
+            if let context = clicker.managedObjectContext {
+                try! context.save()
+            }
+            animate.toggle()
+        }, editMenuType: .clicker,
+                 appearAddButton: true)
+    }
+}
+
+//#Preview {
+//    InactiveClickersTableView()
+//}
