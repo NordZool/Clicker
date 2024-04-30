@@ -27,7 +27,6 @@ struct ClickersView: View {
                     
                 }
             
-            
         }
         
         
