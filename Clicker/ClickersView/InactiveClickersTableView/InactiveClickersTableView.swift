@@ -8,11 +8,27 @@
 import SwiftUI
 
 struct InactiveClickersTableView: View {
+    @FetchRequest(
+        entity: Clicker.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Clicker.timestamp, ascending: true)],
+        predicate: NSPredicate(format: "isActive == %@", NSNumber(value:false)),animation: Resourses.gridAnimation)
+    private var clickers: FetchedResults<Clicker>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GridView(items: clickers.map({$0}), onItemTap: { object in
+            let clicker = object as! Clicker
+            clicker.timestamp = .now
+            clicker.isActive = true
+            
+            if let context = clicker.managedObjectContext {
+                try! context.save()
+            }
+        }, editMenuType: .clicker, appearAddButton: true)
     }
 }
 
-#Preview {
-    InactiveClickersTableView()
-}
+
+//
+//#Preview {
+//    InactiveClickersTableView()
+//}
