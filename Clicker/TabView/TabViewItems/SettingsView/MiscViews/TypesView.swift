@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct TypesView: View {
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: false)])
+    private var types: FetchedResults<ClickerType>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GridView(items: types.map({$0}), onItemTap: { _ in }, editMenuType: .clickerType, appearAddButton: true)
     }
 }
 
 #Preview {
     TypesView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(Settings())
 }

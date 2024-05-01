@@ -18,6 +18,10 @@
 		845BCE632B7E14D000195D2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845BCE622B7E14D000195D2A /* Preview Assets.xcassets */; };
 		845BCE652B7E14D000195D2A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845BCE642B7E14D000195D2A /* Persistence.swift */; };
 		845BCE682B7E14D000195D2A /* ClickerDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BCE662B7E14D000195D2A /* ClickerDataModel.xcdatamodeld */; };
+		8478210E2BE26F4700B46BEF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478210D2BE26F4700B46BEF /* SettingsView.swift */; };
+		847821112BE2769800B46BEF /* EmptyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821102BE2769800B46BEF /* EmptyGridItem.swift */; };
+		847821172BE27C2000B46BEF /* ColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821162BE27C2000B46BEF /* ColorsView.swift */; };
+		847821192BE27D1200B46BEF /* TypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821182BE27D1200B46BEF /* TypesView.swift */; };
 		848F7D7F2B9605D2001CD124 /* UserColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F7D7E2B9605D2001CD124 /* UserColor.swift */; };
 		848F7D812B961453001CD124 /* ClickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F7D802B961453001CD124 /* ClickerType.swift */; };
 		84AFFF8B2BC0393D0005D1F8 /* ColorEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFFF8A2BC0393D0005D1F8 /* ColorEditViewModel.swift */; };
@@ -59,6 +63,10 @@
 		845BCE622B7E14D000195D2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		845BCE642B7E14D000195D2A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		845BCE672B7E14D000195D2A /* Clicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Clicker.xcdatamodel; sourceTree = "<group>"; };
+		8478210D2BE26F4700B46BEF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		847821102BE2769800B46BEF /* EmptyGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGridItem.swift; sourceTree = "<group>"; };
+		847821162BE27C2000B46BEF /* ColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsView.swift; sourceTree = "<group>"; };
+		847821182BE27D1200B46BEF /* TypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesView.swift; sourceTree = "<group>"; };
 		848F7D7E2B9605D2001CD124 /* UserColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserColor.swift; sourceTree = "<group>"; };
 		848F7D802B961453001CD124 /* ClickerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerType.swift; sourceTree = "<group>"; };
 		84AFFF8A2BC0393D0005D1F8 /* ColorEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEditViewModel.swift; sourceTree = "<group>"; };
@@ -102,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				842EA9BE2B97592A00C26AEB /* GridView.swift */,
+				84F7B6332B8F7E01006A12AE /* ItemViews */,
 				84CFBD972B9895B200935E2C /* EditViews */,
 			);
 			path = Grid;
@@ -127,11 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				84F7B6362B8F7EA8006A12AE /* Models */,
-				84F7B6332B8F7E01006A12AE /* ItemView */,
 				84F7B62E2B8F7840006A12AE /* TabView */,
 				84FD611D2BCAD513009153B7 /* Other */,
-				84D438952BD93B5B00C81EE1 /* ClickersView */,
-				842EA9BD2B9758E800C26AEB /* Grid */,
 				84F7B62D2B8F7837006A12AE /* main */,
 				845BCE612B7E14D000195D2A /* Preview Content */,
 			);
@@ -146,12 +152,33 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		845D519D2BD018C90080DE16 /* InactiveClickersTableView */ = {
+		8478210A2BE26E4200B46BEF /* TabViewItems */ = {
 			isa = PBXGroup;
 			children = (
-				845131582BE146B500F621CE /* InactiveClickersTableView.swift */,
+				8478210C2BE26F2800B46BEF /* SettingsView */,
+				84D438952BD93B5B00C81EE1 /* ClickersView */,
 			);
-			path = InactiveClickersTableView;
+			path = TabViewItems;
+			sourceTree = "<group>";
+		};
+		8478210C2BE26F2800B46BEF /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				84FD7BC92B90C14300AC0AA6 /* Settings.swift */,
+				8478210D2BE26F4700B46BEF /* SettingsView.swift */,
+				847821142BE27BF800B46BEF /* MiscViews */,
+				847821102BE2769800B46BEF /* EmptyGridItem.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		847821142BE27BF800B46BEF /* MiscViews */ = {
+			isa = PBXGroup;
+			children = (
+				847821162BE27C2000B46BEF /* ColorsView.swift */,
+				847821182BE27D1200B46BEF /* TypesView.swift */,
+			);
+			path = MiscViews;
 			sourceTree = "<group>";
 		};
 		84A25AB72BBD9604001AAEB9 /* Color */ = {
@@ -173,14 +200,6 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
-		84BD53AB2BB6FFC400B2A202 /* EditmenuType */ = {
-			isa = PBXGroup;
-			children = (
-				84BD53AC2BB7000000B2A202 /* EditmenuType.swift */,
-			);
-			path = EditmenuType;
-			sourceTree = "<group>";
-		};
 		84C492CB2BBC404F00F6F5E5 /* Color */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,8 +219,8 @@
 		84CFBD972B9895B200935E2C /* EditViews */ = {
 			isa = PBXGroup;
 			children = (
-				84BD53AB2BB6FFC400B2A202 /* EditmenuType */,
 				842EA9C32B97686400C26AEB /* EditView.swift */,
+				84BD53AC2BB7000000B2A202 /* EditmenuType.swift */,
 				84CFBD9D2B989E3C00935E2C /* BindingUnwrapOperation.swift */,
 				84B4A5A92BC191AF00ACF8BC /* Type */,
 				84A25AB72BBD9604001AAEB9 /* Color */,
@@ -224,8 +243,10 @@
 			isa = PBXGroup;
 			children = (
 				84D438962BD93B6B00C81EE1 /* ClickersView.swift */,
-				845D519D2BD018C90080DE16 /* InactiveClickersTableView */,
-				84FD611A2BCACAED009153B7 /* ActiveClickersTable */,
+				845131582BE146B500F621CE /* InactiveClickersTableView.swift */,
+				84FD611B2BCACB54009153B7 /* ActiveClickersTableView.swift */,
+				84131FD42BDFCF7800425AAB /* ClickersStepper.swift */,
+				842EA9BD2B9758E800C26AEB /* Grid */,
 			);
 			path = ClickersView;
 			sourceTree = "<group>";
@@ -247,12 +268,13 @@
 			children = (
 				84F7B62F2B8F7858006A12AE /* ClickerTabViewBar.swift */,
 				84D438982BD93F6E00C81EE1 /* ClickerTabView.swift */,
+				8478210A2BE26E4200B46BEF /* TabViewItems */,
 				84F7B6312B8F7881006A12AE /* ScreensEnum.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
 		};
-		84F7B6332B8F7E01006A12AE /* ItemView */ = {
+		84F7B6332B8F7E01006A12AE /* ItemViews */ = {
 			isa = PBXGroup;
 			children = (
 				84F7B6342B8F7E17006A12AE /* ItemView.swift */,
@@ -261,7 +283,7 @@
 				84F7B6392B8F8261006A12AE /* Clicker */,
 				84C492CB2BBC404F00F6F5E5 /* Color */,
 			);
-			path = ItemView;
+			path = ItemViews;
 			sourceTree = "<group>";
 		};
 		84F7B6362B8F7EA8006A12AE /* Models */ = {
@@ -290,19 +312,9 @@
 			path = Type;
 			sourceTree = "<group>";
 		};
-		84FD611A2BCACAED009153B7 /* ActiveClickersTable */ = {
-			isa = PBXGroup;
-			children = (
-				84FD611B2BCACB54009153B7 /* ActiveClickersTableView.swift */,
-				84131FD42BDFCF7800425AAB /* ClickersStepper.swift */,
-			);
-			path = ActiveClickersTable;
-			sourceTree = "<group>";
-		};
 		84FD611D2BCAD513009153B7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				84FD7BC92B90C14300AC0AA6 /* Settings.swift */,
 				843214892BC6D1C8000B1103 /* Functions.swift */,
 				84D438932BD936FF00C81EE1 /* Resourses.swift */,
 				84FD611E2BCAD525009153B7 /* ContextMenuView.swift */,
@@ -390,18 +402,22 @@
 				8432148A2BC6D1C8000B1103 /* Functions.swift in Sources */,
 				84FD7BC82B90BC9700AC0AA6 /* ItemModifier.swift in Sources */,
 				84B4A5AB2BC191C700ACF8BC /* ClickerTypeEditView.swift in Sources */,
+				847821112BE2769800B46BEF /* EmptyGridItem.swift in Sources */,
 				84C492CD2BBC406600F6F5E5 /* ColorView.swift in Sources */,
 				84CFBD9C2B98968C00935E2C /* ClickerEditViewModel.swift in Sources */,
 				84F7B63E2B8F8382006A12AE /* TypeView.swift in Sources */,
 				848F7D7F2B9605D2001CD124 /* UserColor.swift in Sources */,
 				845BCE652B7E14D000195D2A /* Persistence.swift in Sources */,
 				84BD53AD2BB7000000B2A202 /* EditmenuType.swift in Sources */,
+				847821172BE27C2000B46BEF /* ColorsView.swift in Sources */,
 				84F7B6302B8F7858006A12AE /* ClickerTabViewBar.swift in Sources */,
 				84B4A5AD2BC191D500ACF8BC /* ClickerTypeEditViewModel.swift in Sources */,
 				84C9D4B62BB84A3E00176701 /* CategoriesView.swift in Sources */,
 				84CFBD9E2B989E3C00935E2C /* BindingUnwrapOperation.swift in Sources */,
 				848F7D812B961453001CD124 /* ClickerType.swift in Sources */,
 				845BCE682B7E14D000195D2A /* ClickerDataModel.xcdatamodeld in Sources */,
+				8478210E2BE26F4700B46BEF /* SettingsView.swift in Sources */,
+				847821192BE27D1200B46BEF /* TypesView.swift in Sources */,
 				845BCE5E2B7E14CE00195D2A /* ContentView.swift in Sources */,
 				84FD7BCA2B90C14300AC0AA6 /* Settings.swift in Sources */,
 				84FD611F2BCAD525009153B7 /* ContextMenuView.swift in Sources */,

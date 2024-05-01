@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct ColorsView: View {
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: false)])
+    private var colors: FetchedResults<UserColor>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GridView(items: colors.map({$0}), onItemTap: { _ in }, editMenuType: .color, appearAddButton: true)
     }
 }
 
 #Preview {
     ColorsView()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(Settings())
 }

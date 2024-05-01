@@ -1,7 +1,7 @@
 import Foundation
 
 final class Settings : ObservableObject {
-    //optimal range for this is from 70 to 180
+    //optimal range for this is from 73 to 150
     //used in GridItem and in .frame() modifier of ClickerView and TypeView
     @Published var itemSize: CGFloat {
         didSet {
@@ -9,10 +9,17 @@ final class Settings : ObservableObject {
         }
     }
     
+//    @Published var itemTypeSample: EditmenuType {
+//        didSet {
+//            Settings.encode(data: itemTypeSample, for: userDefaultsKey_itemTypeSample)
+//        }
+//    }
+    
     init() {
         //init data for 'itemSize' from UD
         //standart size is 80
-        itemSize = Settings.decode(for: userDefaultsKey_itemSize) ?? 80
+        self.itemSize = Settings.decode(for: userDefaultsKey_itemSize) ?? 80
+//        self.itemTypeSample = Settings.decode(for: userDefaultsKey_itemTypeSample) ?? .clicker
     }
     
     static private func encode<T:Codable>(data:T, for key: String, in userDefaults:UserDefaults = .standard) {
@@ -36,4 +43,5 @@ final class Settings : ObservableObject {
     
     //variable only for UD
     private let userDefaultsKey_itemSize = "ITEMSIZE"
+//    private let userDefaultsKey_itemTypeSample = "ITEMSAMPLETYPE"
 }

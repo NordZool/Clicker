@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct SampleGridView : View {
-    @EnvironmentObject private var settings:Settings
-    
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: settings.itemSize, maximum: settings.itemSize),spacing: 10)], content: {
-                EmptyGridItem(label: "Test")
-                EmptyGridItem(label: "Test")
-                EmptyGridItem(label: "Test")
-            })
-        }
-//        .padding(10)
-        
-    }
-}
+//struct SampleGridView : View {
+//    @EnvironmentObject private var settings:Settings
+//    
+//    var body: some View {
+//        ScrollView {
+//            LazyVGrid(columns: [GridItem(.adaptive(minimum: settings.itemSize, maximum: settings.itemSize),spacing: 10)], content: {
+//                EmptyGridItem(label: "Test")
+//                EmptyGridItem(label: "Test")
+//                EmptyGridItem(label: "Test")
+//            })
+//        }
+////        .padding(10)
+//        
+//    }
+//}
 
  struct EmptyGridItem: View {
     @EnvironmentObject private var settings: Settings
@@ -39,6 +39,6 @@ struct SampleGridView : View {
 }
 
 #Preview {
-    SampleGridView()
+    EmptyGridItem(label: "Test")
         .environmentObject(Settings())
 }

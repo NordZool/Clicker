@@ -11,15 +11,23 @@ struct ClickerTabView: View {
     @Binding var selection: ScreensEnum
     
     var body: some View {
-        TabView(selection: $selection) {
-            ClickersView()
-                .tag(ScreensEnum.clickers)
-            Text("Lol1")
-                .tag(ScreensEnum.graphic)
-            Text("Lol2")
-                .tag(ScreensEnum.settings)
+        VStack {
+            TabView(selection: $selection) {
+                ClickersView()
+                    .tag(ScreensEnum.clickers)
+                Text("Lol1")
+                    .tag(ScreensEnum.graphic)
+                Text("Lol2")
+                    .tag(ScreensEnum.settings)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            
+            //line between TabView and TabViewBar
+            Divider()
+                .padding(.top, -8)
+            ClickerTabViewBar(screenInView: $selection)
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
+        
     }
 }
 
@@ -29,11 +37,11 @@ fileprivate struct PreviewClickerTabView : View {
     var body: some View {
         NavigationStack {
             ClickerTabView(selection: $selection)
-                .toolbar {
-                    ToolbarItem(placement: .bottomBar) {
-                        ClickerTabViewBar(screenInView: $selection)
-                    }
-                }
+//                .toolbar {
+//                    ToolbarItem(placement: .bottomBar) {
+//                        ClickerTabViewBar(screenInView: $selection)
+//                    }
+//                }
         }
         
             .environmentObject(Settings())

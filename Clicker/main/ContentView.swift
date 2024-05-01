@@ -18,10 +18,6 @@ struct ContentView: View {
             VStack {
                 ClickerTabView(selection: $currenctScreen)
                 
-                //line between bottomToolBar and TabView
-                Divider()
-                    .padding(.top, -8)
-                ClickerTabViewBar(screenInView: $currenctScreen)
                     
             }
             
