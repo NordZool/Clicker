@@ -35,13 +35,11 @@ struct ActiveClickersTableView: View {
             //user's guide
             VStack {
                     if clickers.isEmpty {
-                        VStack {
                             Text("Tap on clicker to start counting it")
                                 .font(.title2)
                             Text("Long tap to edit")
                                 .font(.title3)
                                 .foregroundStyle(.gray)
-                        }
                     }
                 //without 'if else' statement for best animation
                     

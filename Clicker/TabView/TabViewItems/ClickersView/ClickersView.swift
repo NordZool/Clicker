@@ -19,11 +19,13 @@ struct ClickersView: View {
                 .padding(.bottom,-8)
                 
                 ScrollView {
-                    ActiveClickersTableView()
-                    
-                    Rectangle()
-                        .frame(height: 3)
-                    InactiveClickersTableView()
+                    LazyVStack {
+                        ActiveClickersTableView()
+                        
+                        Rectangle()
+                            .frame(height: 3)
+                        InactiveClickersTableView()
+                    }
                     
                 }
             

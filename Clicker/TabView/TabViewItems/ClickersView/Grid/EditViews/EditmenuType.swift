@@ -1,6 +1,7 @@
 import Foundation
 
-enum EditmenuType {
+//Codable for 'itemTypeSampel' in 'Settings'
+enum EditmenuType: Codable {
     case clicker
     case clickerType
     case color
