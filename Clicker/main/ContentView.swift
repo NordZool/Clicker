@@ -9,18 +9,10 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @State private var currenctScreen = ScreensEnum.clickers
     
     let persistence: PersistenceController
-        //used only for animate Clickers movement animation
-        @State private var animate = false
     var body: some View {
-            VStack {
-                ClickerTabView(selection: $currenctScreen)
-                
-                    
-            }
-            
+                ClickerTabView()
     }
 }
 

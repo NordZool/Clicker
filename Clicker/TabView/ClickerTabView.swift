@@ -8,25 +8,30 @@
 import SwiftUI
 
 struct ClickerTabView: View {
-    @Binding var selection: ScreensEnum
+    @EnvironmentObject var settings: Settings
     
     var body: some View {
-        VStack {
-            TabView(selection: $selection) {
-                ClickersView()
-                    .tag(ScreensEnum.clickers)
-                Text("Lol1")
-                    .tag(ScreensEnum.graphic)
-                Text("Lol2")
-                    .tag(ScreensEnum.settings)
+            VStack {
+                TabView(selection: $settings.currentScreen) {
+                        ClickersView()
+                        .tag(ScreensEnum.clickers)
+
+                        Text("Lol1")
+                    
+                        .tag(ScreensEnum.graphic)
+                        SettingsView()
+                            .tag(ScreensEnum.settings)
+                            .navigationTitle("Test")
+                           
+                    
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                
+                //line between TabView and TabViewBar
+                Divider()
+                    .padding(.top, -8)
+                ClickerTabViewBar(screenInView: $settings.currentScreen)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            
-            //line between TabView and TabViewBar
-            Divider()
-                .padding(.top, -8)
-            ClickerTabViewBar(screenInView: $selection)
-        }
         
     }
 }
@@ -35,17 +40,15 @@ fileprivate struct PreviewClickerTabView : View {
     @State private var selection = ScreensEnum.clickers
     
     var body: some View {
-        NavigationStack {
-            ClickerTabView(selection: $selection)
-//                .toolbar {
-//                    ToolbarItem(placement: .bottomBar) {
-//                        ClickerTabViewBar(screenInView: $selection)
-//                    }
-//                }
-        }
+            ClickerTabView()
+            //                .toolbar {
+            //                    ToolbarItem(placement: .bottomBar) {
+            //                        ClickerTabViewBar(screenInView: $selection)
+            //                    }
+            //                }
         
-            .environmentObject(Settings())
-            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(Settings())
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }
 

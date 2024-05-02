@@ -1,7 +1,8 @@
 import Foundation
 
 //rawValue = "systemImageString"
-enum ScreensEnum : String, CaseIterable{
+//Codable only for save 'currentScreen' value in 'Settings'
+enum ScreensEnum : String, CaseIterable, Codable{
     case clickers = "list.bullet"
     case graphic = "circle.filled.pattern.diagonalline.rectangle"
     case settings = "gearshape.fill"

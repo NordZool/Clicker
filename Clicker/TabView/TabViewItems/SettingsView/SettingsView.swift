@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
+    
+    @Environment(\.colorScheme) private var scheme
+    
+    @State private var colorsIsPresented = false
+    @State private var typesIsPresented = false
     var body: some View {
-        NavigationStack {
+        VStack {
+            VStack {
+                Text("Settings")
+                    .font(.headline)
+                Divider()
+            }
+            .padding(.bottom,-8)
+                
             Form {
                 Section("APPEARANCE") {
                     HStack{
@@ -22,15 +34,27 @@ struct SettingsView: View {
                         .animation(Resourses.gridAnimation, value: settings.itemSize)
                 }
                 
-                Section("Misc") {
-                    NavigationLink(destination: {ColorsView()}, label: {Text("Colors")})
-                    NavigationLink(destination: {TypesView()}, label: {Text("Types")})
-                    
+                Section("MISC") {
+                        Button("Colors") {
+                            colorsIsPresented = true
+                        }
+                        .foregroundStyle(scheme == .light ? .black : .white)
+                        .sheet(isPresented: $colorsIsPresented, content: {
+                            MiscView<UserColor>(itemsType: .color)
+                        })
+                        
+                        Button("Types") {
+                            typesIsPresented = true
+                        }
+                        .foregroundStyle(scheme == .light ? .black : .white)
+                        .sheet(isPresented: $typesIsPresented, content: {
+                            MiscView<ClickerType>(itemsType: .clickerType)
+                        })
                 }
                 
             }
-            .navigationTitle("Settings")
         }
+
         
     }
 }

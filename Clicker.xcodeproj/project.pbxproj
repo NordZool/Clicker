@@ -20,8 +20,7 @@
 		845BCE682B7E14D000195D2A /* ClickerDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 845BCE662B7E14D000195D2A /* ClickerDataModel.xcdatamodeld */; };
 		8478210E2BE26F4700B46BEF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478210D2BE26F4700B46BEF /* SettingsView.swift */; };
 		847821112BE2769800B46BEF /* EmptyGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821102BE2769800B46BEF /* EmptyGridItem.swift */; };
-		847821172BE27C2000B46BEF /* ColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821162BE27C2000B46BEF /* ColorsView.swift */; };
-		847821192BE27D1200B46BEF /* TypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821182BE27D1200B46BEF /* TypesView.swift */; };
+		847821172BE27C2000B46BEF /* MiscView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847821162BE27C2000B46BEF /* MiscView.swift */; };
 		848F7D7F2B9605D2001CD124 /* UserColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F7D7E2B9605D2001CD124 /* UserColor.swift */; };
 		848F7D812B961453001CD124 /* ClickerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F7D802B961453001CD124 /* ClickerType.swift */; };
 		84AFFF8B2BC0393D0005D1F8 /* ColorEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFFF8A2BC0393D0005D1F8 /* ColorEditViewModel.swift */; };
@@ -65,8 +64,7 @@
 		845BCE672B7E14D000195D2A /* Clicker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Clicker.xcdatamodel; sourceTree = "<group>"; };
 		8478210D2BE26F4700B46BEF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		847821102BE2769800B46BEF /* EmptyGridItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGridItem.swift; sourceTree = "<group>"; };
-		847821162BE27C2000B46BEF /* ColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsView.swift; sourceTree = "<group>"; };
-		847821182BE27D1200B46BEF /* TypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesView.swift; sourceTree = "<group>"; };
+		847821162BE27C2000B46BEF /* MiscView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscView.swift; sourceTree = "<group>"; };
 		848F7D7E2B9605D2001CD124 /* UserColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserColor.swift; sourceTree = "<group>"; };
 		848F7D802B961453001CD124 /* ClickerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerType.swift; sourceTree = "<group>"; };
 		84AFFF8A2BC0393D0005D1F8 /* ColorEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorEditViewModel.swift; sourceTree = "<group>"; };
@@ -166,19 +164,10 @@
 			children = (
 				84FD7BC92B90C14300AC0AA6 /* Settings.swift */,
 				8478210D2BE26F4700B46BEF /* SettingsView.swift */,
-				847821142BE27BF800B46BEF /* MiscViews */,
+				847821162BE27C2000B46BEF /* MiscView.swift */,
 				847821102BE2769800B46BEF /* EmptyGridItem.swift */,
 			);
 			path = SettingsView;
-			sourceTree = "<group>";
-		};
-		847821142BE27BF800B46BEF /* MiscViews */ = {
-			isa = PBXGroup;
-			children = (
-				847821162BE27C2000B46BEF /* ColorsView.swift */,
-				847821182BE27D1200B46BEF /* TypesView.swift */,
-			);
-			path = MiscViews;
 			sourceTree = "<group>";
 		};
 		84A25AB72BBD9604001AAEB9 /* Color */ = {
@@ -409,7 +398,7 @@
 				848F7D7F2B9605D2001CD124 /* UserColor.swift in Sources */,
 				845BCE652B7E14D000195D2A /* Persistence.swift in Sources */,
 				84BD53AD2BB7000000B2A202 /* EditmenuType.swift in Sources */,
-				847821172BE27C2000B46BEF /* ColorsView.swift in Sources */,
+				847821172BE27C2000B46BEF /* MiscView.swift in Sources */,
 				84F7B6302B8F7858006A12AE /* ClickerTabViewBar.swift in Sources */,
 				84B4A5AD2BC191D500ACF8BC /* ClickerTypeEditViewModel.swift in Sources */,
 				84C9D4B62BB84A3E00176701 /* CategoriesView.swift in Sources */,
@@ -417,7 +406,6 @@
 				848F7D812B961453001CD124 /* ClickerType.swift in Sources */,
 				845BCE682B7E14D000195D2A /* ClickerDataModel.xcdatamodeld in Sources */,
 				8478210E2BE26F4700B46BEF /* SettingsView.swift in Sources */,
-				847821192BE27D1200B46BEF /* TypesView.swift in Sources */,
 				845BCE5E2B7E14CE00195D2A /* ContentView.swift in Sources */,
 				84FD7BCA2B90C14300AC0AA6 /* Settings.swift in Sources */,
 				84FD611F2BCAD525009153B7 /* ContextMenuView.swift in Sources */,
