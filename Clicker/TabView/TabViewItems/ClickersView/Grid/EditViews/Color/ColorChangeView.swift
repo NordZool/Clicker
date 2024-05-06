@@ -8,13 +8,6 @@
 import SwiftUI
 import CoreData
 
-protocol Colorness : NSManagedObject{
-    var color: UserColor? {get set}
-}
-
-extension Clicker : Colorness {}
-extension ClickerType : Colorness {}
-
 
 struct ColorChangeView<T:Colorness>: View {
     @ObservedObject var item: T

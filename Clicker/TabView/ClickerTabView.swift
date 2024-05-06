@@ -13,19 +13,23 @@ struct ClickerTabView: View {
     var body: some View {
             VStack {
                 TabView(selection: $settings.currentScreen) {
+                    //Grouped for apply .toolbar(.hideden, for:.tabBar) for all views
+                    Group {
                         ClickersView()
-                        .tag(ScreensEnum.clickers)
-
-                        Text("Lol1")
-                    
-                        .tag(ScreensEnum.graphic)
+                            .tag(ScreensEnum.clickers)
+                        
+                       
+                        
+                            .tag(ScreensEnum.graphic)
+                        
                         SettingsView()
                             .tag(ScreensEnum.settings)
-                            .navigationTitle("Test")
-                           
+                    }
+                    .toolbar(.hidden,for: .tabBar)
                     
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
+                
+                
                 
                 //line between TabView and TabViewBar
                 Divider()

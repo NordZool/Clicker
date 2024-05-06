@@ -47,15 +47,12 @@ struct EditView<T:NSManagedObject>: View {
                 case .clicker:
                     ClickerEditView(viewModel:.init(context:contextForAdd,
                                                     clicker: item as? Clicker))
-                    .navigationTitle("Clicker")
                 case .clickerType:
                     ClickerTypeEditView(viewModel: .init(context: contextForAdd,
                                                          type: item as? ClickerType))
-                    .navigationTitle("Type")
                 case .color:
                     ColorEditView(viewModel: .init(context: contextForAdd,
                                                    color: item as? UserColor))
-                    .navigationTitle("Color")
                     
                 }
             }

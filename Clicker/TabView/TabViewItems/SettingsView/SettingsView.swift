@@ -15,14 +15,9 @@ struct SettingsView: View {
     @State private var colorsIsPresented = false
     @State private var typesIsPresented = false
     var body: some View {
-        VStack {
-            VStack {
-                Text("Settings")
-                    .font(.headline)
-                Divider()
-            }
-            .padding(.bottom,-8)
-                
+  
+        NavigationStack {
+            
             Form {
                 Section("APPEARANCE") {
                     HStack{
@@ -35,26 +30,33 @@ struct SettingsView: View {
                 }
                 
                 Section("MISC") {
-                        Button("Colors") {
-                            colorsIsPresented = true
-                        }
-                        .foregroundStyle(scheme == .light ? .black : .white)
-                        .sheet(isPresented: $colorsIsPresented, content: {
-                            MiscView<UserColor>(itemsType: .color)
-                        })
-                        
-                        Button("Types") {
-                            typesIsPresented = true
-                        }
-                        .foregroundStyle(scheme == .light ? .black : .white)
-                        .sheet(isPresented: $typesIsPresented, content: {
-                            MiscView<ClickerType>(itemsType: .clickerType)
-                        })
+//                    Button("Colors") {
+//                        colorsIsPresented = true
+//                    }
+//                    .foregroundStyle(scheme == .light ? .black : .white)
+//                    .sheet(isPresented: $colorsIsPresented, content: {
+//                        MiscView<UserColor>(itemsType: .color)
+//                    })
+                    
+                    NavigationLink(destination: MiscView<UserColor>(itemsType: .color)) {
+                        Text("Colors")
+                    }
+                    NavigationLink(destination: MiscView<ClickerType>(itemsType: .clickerType)) {
+                        Text("Types")
+                    }
+                    
+//                    Button("Types") {
+//                        typesIsPresented = true
+//                    }
+//                    .foregroundStyle(scheme == .light ? .black : .white)
+//                    .sheet(isPresented: $typesIsPresented, content: {
+//                        MiscView<ClickerType>(itemsType: .clickerType)
+//                    })
                 }
                 
             }
+            .navigationTitle("Settings")
         }
-
         
     }
 }

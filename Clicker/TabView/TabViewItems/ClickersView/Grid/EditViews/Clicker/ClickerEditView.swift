@@ -46,7 +46,7 @@ struct ClickerEditView: View {
                 }
             }
             Section("Other") {
-                NavigationLink("Categories") {
+                NavigationLink("Types") {
                     CategoriesView( clicker:viewModel.clicker)
                 }
                 

@@ -71,3 +71,5 @@ extension Clicker {
         self.amount -= Int64(self.reduceNumber)
     }
 }
+
+extension Clicker : Amountness, Colorness {}

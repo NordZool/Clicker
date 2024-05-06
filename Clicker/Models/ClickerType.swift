@@ -45,3 +45,17 @@ extension ClickerType {
         return object
     }
 }
+
+//for protocol "Amountable" in "DiagramView"
+extension ClickerType {
+   var amount: Int64 {
+       get {
+           35
+       }
+       set {
+           
+       }
+   }
+}
+
+extension ClickerType : Amountness, Colorness {}

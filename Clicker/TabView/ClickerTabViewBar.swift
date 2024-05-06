@@ -15,14 +15,15 @@ struct ClickerTabViewBar: View {
                 Spacer()
                 ForEach(ScreensEnum.allCases, id:\.self) {screenEnumCase in
                     Button {
-                        withAnimation(.easeOut) {
+                        withAnimation(.easeOut(duration: 0.2)) {
                             screenInView = screenEnumCase
                         }
                     } label: {
                         Image(systemName: screenEnumCase.rawValue)
                     }
                     .foregroundStyle(screenInView == screenEnumCase ? Color.primary : .secondary)
-                    .scaleEffect(1.5)
+                    .scaleEffect(screenInView == screenEnumCase ? 1.8 : 1.5)
+                    
                     Spacer()
                 }
             }

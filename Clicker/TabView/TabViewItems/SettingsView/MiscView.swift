@@ -12,7 +12,7 @@ import CoreData
 struct MiscView<T:NSManagedObject & Identifiable>: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: false)])
     private var items: FetchedResults<T>
-    @Environment(\.dismiss) private var dismiss
+//    @Environment(\.dismiss) private var dismiss
     private let title: String
     let itemsType: EditmenuType
     
@@ -32,13 +32,13 @@ struct MiscView<T:NSManagedObject & Identifiable>: View {
     var body: some View {
         NavigationStack {
             GridView(items: items.map({$0}), onItemTap: { _ in }, editMenuType: itemsType, appearAddButton: true)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Done") {
-                            dismiss.callAsFunction()
-                        }
-                    }
-                }
+//                .toolbar {
+//                    ToolbarItem(placement: .topBarTrailing) {
+//                        Button("Done") {
+//                            dismiss.callAsFunction()
+//                        }
+//                    }
+//                }
                 .navigationTitle(title)
         }
     }
