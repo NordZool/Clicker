@@ -14,7 +14,8 @@ protocol Colorness : NSManagedObject{
 }
 
 //used in "SectorView" generics
-protocol Amountness : NSManagedObject & Identifiable{
+protocol DiagramAvaliable : NSManagedObject & Identifiable{
     var amount: Int64 {get set}
     var name: String? {get set}
+    var isActiveOnDiagram: Bool {get set}
 }

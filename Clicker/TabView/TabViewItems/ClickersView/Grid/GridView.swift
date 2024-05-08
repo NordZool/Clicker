@@ -82,7 +82,7 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
         onItemTap: {clicker in
             let clicker = clicker as! Clicker
             //        clicker.isActive = true
-          clicker.objectID
+//          clicker.objectID
         }, editMenuType: .clicker, appearAddButton: true)
     
     .environment(\.managedObjectContext, context)

@@ -21,17 +21,53 @@ import Charts
 //extension Clicker : Amountable {}
 //
 struct DiagramView: View {
+    @EnvironmentObject var settings: Settings
+    @State private var isFilterViewPresented = false
     
+    var currentTittle: String {
+        switch settings.diagramType {
+        case .clicker:
+            "Clickers"
+        case .clickerType:
+            "Types"
+        default:
+            "Error"
+        }
+    }
     
     var body: some View {
-        VStack {
-            SectorView<Clicker>()
-            Text("My list")
+        NavigationStack {
+            Group {
+                switch settings.diagramType {
+                case .clicker:
+                    SectorView<Clicker>()
+                case .clickerType:
+                    SectorView<ClickerType>()
+                default:
+                    Text("Error")
+                }
+            }
+            .navigationTitle(currentTittle)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isFilterViewPresented = true
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                    }
+
+                }
+            }
+            .sheet(isPresented: $isFilterViewPresented, content: {
+                DiagramFilterView(diagramType: $settings.diagramType)
+            })
         }
     }
 }
+
 //
 #Preview {
     DiagramView()
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(Settings())
 }

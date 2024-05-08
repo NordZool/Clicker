@@ -64,7 +64,7 @@ struct ColorChangeView<T:Colorness>: View {
 
 #Preview {
     let persistence = PersistenceController.shared
-    let contextForDeepUse = persistence.childViewContext
+//    let contextForDeepUse = persistence.childViewContext
     //    let color = UserColor.oneUserColor(contextForDeepUse)
     let clicker = Clicker.oneClicker(context: persistence.container.viewContext)
     //    try? contextForDeepUse.save()
