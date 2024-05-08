@@ -62,7 +62,7 @@ extension Clicker {
             .sorted(by: {$0.timestamp ?? .now < $1.timestamp ?? .now})
         ?? []
     }
-    
+
     func increaseOperation() {
         self.amount += Int64(self.increaseNumber)
     }
@@ -70,6 +70,7 @@ extension Clicker {
     func reduceOperation() {
         self.amount -= Int64(self.reduceNumber)
     }
+    
 }
 
-extension Clicker : Amountness, Colorness {}
+extension Clicker : DiagramAvaliable, Colorness {}

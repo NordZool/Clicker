@@ -4,6 +4,7 @@
         <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="increaseNumber" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isActiveOnDiagram" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="reduceNumber" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -11,6 +12,7 @@
         <relationship name="types" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ClickerType" inverseName="clickers" inverseEntity="ClickerType"/>
     </entity>
     <entity name="ClickerType" representedClassName="ClickerType" syncable="YES" codeGenerationType="class">
+        <attribute name="isActiveOnDiagram" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="clickers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Clicker" inverseName="types" inverseEntity="Clicker"/>

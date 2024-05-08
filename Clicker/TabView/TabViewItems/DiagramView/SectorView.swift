@@ -7,45 +7,51 @@
 
 import SwiftUI
 import Charts
+import CoreData
 
  
 
 
 
-struct SectorView<T: Amountness & Colorness>: View {
-    @FetchRequest(sortDescriptors: []) private var items: FetchedResults<T>
-    @State private var selectedItem: T? = nil
+struct SectorView<T: DiagramAvaliable & Colorness>: View {
+    //Becounse I use protocols for generic I can't use
+    //sortDescriptors or predicates. Thus items sorted and
+    //filtered when I use these.
+    @FetchRequest(sortDescriptors: []) private var rawItems: FetchedResults<T>
+    
     
     var body: some View {
-       ScrollView {
-           VStack {
-               Chart {
-                   ForEach(items.sorted(by: {$0.amount > $1.amount})) {clicker in
-                       if  clicker.amount >= 0 {
-                           SectorMark(angle: .value("Amount", clicker.amount), innerRadius: .ratio(0.618),outerRadius: .ratio(0.9), angularInset: 3)
-                               .foregroundStyle(clicker.color?.UIColor ?? .gray)
-                               .cornerRadius(6)
-                               
-                       }
-                       
-                   }
-               }
-               .overlay {
-                   if let item = selectedItem {
-                       
-                   } else {
-                       Text("Press on sector\n to see amount")
-                           .font(.title3)
-                           .multilineTextAlignment(.center)
-                           .opacity(0.5)
-                   }
-               }
-               
-               .frame(width: .infinity, height: 400)
-               Divider()
-               SectorList(items: items.sorted(by: {$0.amount > $1.amount}))
-           }
+       Spliter(items: rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
+    }
+    
+    //I use this view for do filter{} and sorted{} just one single time
+    struct Spliter : View {
+        var items: [T]
+        
+        var body: some View {
+            ScrollView {
+                VStack {
+                    Chart {
+                        ForEach(items) {item in
+                            if  item.amount >= 0 {
+                                SectorMark(angle: .value("Amount", item.amount), innerRadius: .ratio(0.618),outerRadius: .ratio(0.9), angularInset: 3)
+                                    .foregroundStyle(item.color?.UIColor ?? .gray)
+                                    .cornerRadius(6)
+                                    
+                                    
+                            }
+                            
+                        }
+                    }
+                    
+                    .frame(width: .infinity, height: 400)
+                    Divider()
+                    SectorList(items: items)
+                }
+             }
         }
+        
+        
     }
 
 }

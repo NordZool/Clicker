@@ -41,7 +41,6 @@ extension ClickerType {
             fatalError("Copy clicker error")
         }
         
-        
         return object
     }
 }
@@ -58,4 +57,4 @@ extension ClickerType {
    }
 }
 
-extension ClickerType : Amountness, Colorness {}
+extension ClickerType : DiagramAvaliable, Colorness {}

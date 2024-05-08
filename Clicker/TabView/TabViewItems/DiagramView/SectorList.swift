@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SectorList<T: Amountness & Colorness>: View {
+struct SectorList<T: DiagramAvaliable & Colorness>: View {
      var items: [T]
     var body: some View {
         ScrollView {

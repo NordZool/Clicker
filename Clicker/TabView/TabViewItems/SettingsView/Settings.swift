@@ -15,6 +15,12 @@ final class Settings : ObservableObject {
         }
     }
     
+    //using and changing only in DiagramFilterView
+    @Published var diagramType: EditmenuType {
+        didSet {
+            Settings.encode(data: diagramType, for: userDefaultsKey_diagramType)
+        }
+    }
 //    @Published var itemTypeSample: EditmenuType {
 //        didSet {
 //            Settings.encode(data: itemTypeSample, for: userDefaultsKey_itemTypeSample)
@@ -26,6 +32,7 @@ final class Settings : ObservableObject {
         //standart size is 80
         self.itemSize = Settings.decode(for: userDefaultsKey_itemSize) ?? 80
         self.currentScreen = Settings.decode(for: userDefaultsKey_currentScreen) ?? .clickers
+        self.diagramType  = Settings.decode(for: userDefaultsKey_diagramType) ?? .clicker
 //        self.itemTypeSample = Settings.decode(for: userDefaultsKey_itemTypeSample) ?? .clicker
     }
     
@@ -51,5 +58,6 @@ final class Settings : ObservableObject {
     //variable only for UD
     private let userDefaultsKey_itemSize = "ITEMSIZE"
     private let userDefaultsKey_currentScreen = "CURRENTSCREEN"
+    private let userDefaultsKey_diagramType = "DIAGRAMTYPE"
 //    private let userDefaultsKey_itemTypeSample = "ITEMSAMPLETYPE"
 }
