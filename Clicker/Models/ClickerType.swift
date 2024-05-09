@@ -49,10 +49,13 @@ extension ClickerType {
 extension ClickerType {
    var amount: Int64 {
        get {
-           35
+           (self.clickers as! Set<Clicker>)
+               .map({$0.amount})
+               .reduce(0, +)
        }
        set {
-           
+           //empty, becouse we cannot change amount of all clickers
+           //as single number change
        }
    }
 }

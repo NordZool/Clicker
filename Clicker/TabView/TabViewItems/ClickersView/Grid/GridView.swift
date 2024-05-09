@@ -74,17 +74,14 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
     }
 }
 
-#Preview {
-    let persistence = PersistenceController.shared
-    let context = persistence.container.viewContext
-    return GridView(
-        items: try! context.fetch(Clicker.fetchRequest()),
-        onItemTap: {clicker in
-            let clicker = clicker as! Clicker
-            //        clicker.isActive = true
-//          clicker.objectID
-        }, editMenuType: .clicker, appearAddButton: true)
-    
-    .environment(\.managedObjectContext, context)
-    .environmentObject(Settings())
-}
+//#Preview {
+//    let persistence = PersistenceController.shared
+//    let context = persistence.container.viewContext
+//    return GridView(
+//        items: try! context.fetch(Clicker.fetchRequest()),
+//        onItemTap: {_ in
+//        }, editMenuType: .clicker, appearAddButton: true)
+//    
+//    .environment(\.managedObjectContext, context)
+//    .environmentObject(Settings())
+//}

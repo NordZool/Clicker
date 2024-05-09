@@ -18,4 +18,5 @@ protocol DiagramAvaliable : NSManagedObject & Identifiable{
     var amount: Int64 {get set}
     var name: String? {get set}
     var isActiveOnDiagram: Bool {get set}
+    
 }

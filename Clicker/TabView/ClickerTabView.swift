@@ -19,7 +19,7 @@ struct ClickerTabView: View {
                             .tag(ScreensEnum.clickers)
                         
                        
-                        
+                        DiagramView()
                             .tag(ScreensEnum.graphic)
                         
                         SettingsView()

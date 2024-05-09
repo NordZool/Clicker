@@ -21,7 +21,7 @@ import Charts
 //extension Clicker : Amountable {}
 //
 struct DiagramView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     @State private var isFilterViewPresented = false
     
     var currentTittle: String {

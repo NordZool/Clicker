@@ -62,18 +62,11 @@ struct ColorChangeView<T:Colorness>: View {
     }
 }
 
-#Preview {
-    let persistence = PersistenceController.shared
-//    let contextForDeepUse = persistence.childViewContext
-    //    let color = UserColor.oneUserColor(contextForDeepUse)
-    let clicker = Clicker.oneClicker(context: persistence.container.viewContext)
-    //    try? contextForDeepUse.save()
-    //    clicker.color = color
-    //    let viewContext = persistence.container.viewContext
-    //    UserColor.tenUserColors(persistence.container.viewContext)
-    //    try? persistence.container.viewContext.save()
-    
-    return ColorChangeView( item: clicker)
-        .environment(\.managedObjectContext, persistence.container.viewContext)
-        .environmentObject(Settings())
-}
+//#Preview {
+//    let persistence = PersistenceController.shared
+//    let clicker = Clicker.oneClicker(context: persistence.container.viewContext)
+//    
+//    return ColorChangeView( item: clicker)
+//        .environment(\.managedObjectContext, persistence.container.viewContext)
+//        .environmentObject(Settings())
+//}

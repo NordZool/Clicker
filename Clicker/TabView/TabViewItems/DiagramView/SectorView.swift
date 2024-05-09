@@ -21,49 +21,54 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
     
     
     var body: some View {
-       Spliter(items: rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
-    }
-    
-    //I use this view for do filter{} and sorted{} just one single time
-    struct Spliter : View {
-        var items: [T]
-        
-        var body: some View {
-            ScrollView {
-                VStack {
-                    Chart {
-                        ForEach(items) {item in
-                            if  item.amount >= 0 {
-                                SectorMark(angle: .value("Amount", item.amount), innerRadius: .ratio(0.618),outerRadius: .ratio(0.9), angularInset: 3)
-                                    .foregroundStyle(item.color?.UIColor ?? .gray)
-                                    .cornerRadius(6)
-                                    
-                                    
-                            }
+        ScrollView {
+            VStack {
+                Chart {
+                    ForEach(rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount})) {item in
+                        if item.amount >= 0 {
+                            SectorMark(angle: .value("Amount", item.amount), innerRadius: .ratio(0.618),outerRadius: .ratio(0.9), angularInset: 3)
+                                .foregroundStyle(item.color?.UIColor ?? .gray)
+                                .cornerRadius(6)
                             
                         }
                     }
-                    
-                    .frame(width: .infinity, height: 400)
-                    Divider()
-                    SectorList(items: items)
                 }
-             }
-        }
-        
-        
+                
+                .frame(width: .infinity, height: 400)
+                Divider()
+                SectorList(items:  rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
+            }
+         }
     }
+    
+    //I use this view for do filter{} and sorted{} just one single time
+    
+    //for changing "SectorMark" when user
+    //Edit item in "SectorList"
+//    struct ObservedSectorMark : ChartContent {
+//        @ObservedObject var item: T
+//        
+//        var body: some ChartContent {
+//            if item.amount >= 0 {
+//                SectorMark(angle: .value("Amount", item.amount), innerRadius: .ratio(0.618),outerRadius: .ratio(0.9), angularInset: 3)
+//                    .foregroundStyle(item.color?.UIColor ?? .gray)
+//                    .cornerRadius(6)
+//                    
+//            }
+//        }
+//    }
 
 }
 
 fileprivate struct SectorPreview : View {
     
     var body: some View {
-        SectorView<Clicker>()
+        SectorView<ClickerType>()
     }
 }
 
 #Preview {
     SectorPreview()
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .environmentObject(Settings())
 }
