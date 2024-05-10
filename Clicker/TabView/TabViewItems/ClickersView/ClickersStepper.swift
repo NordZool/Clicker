@@ -12,6 +12,7 @@ struct ClickersStepper: View {
         entity: Clicker.entity(), sortDescriptors: [],
         predicate: NSPredicate(format: "isActive == %@", NSNumber(value:true)))
     private var clickers: FetchedResults<Clicker>
+    @Environment(\.managedObjectContext) private var moc
     
     var body: some View {
         HStack {
@@ -19,6 +20,7 @@ struct ClickersStepper: View {
                 clickers.forEach { clicker in
                     clicker.reduceOperation()
                 }
+                try! moc.save()
             } label: {
                 Image(systemName: "minus")
                 .modifyStepper()
@@ -30,6 +32,7 @@ struct ClickersStepper: View {
                 clickers.forEach { clicker in
                     clicker.increaseOperation()
                 }
+                try! moc.save()
             } label: {
                 Image(systemName: "plus")
                     .modifyStepper()
@@ -59,4 +62,5 @@ fileprivate extension View {
 
 #Preview {
     ClickersStepper()
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

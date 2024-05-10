@@ -8,14 +8,28 @@
 import SwiftUI
 import CoreData
 
-struct GridView<T:NSManagedObject & Identifiable>: View {
+
+extension GridView where V == EmptyModifier {
+    init(items:[T], onItemTap: @escaping (T) -> (), editMenuType: EditmenuType,appearAddButton:Bool, context: NSManagedObjectContext? = nil) {
+        self.itemModifier = {_ in  EmptyModifier()}
+        
+        self.items = items
+        self.onItemTap = onItemTap
+        self.editMenuType = editMenuType
+        self.appearAddButton = appearAddButton
+        self.context = context
+    }
+}
+
+struct GridView<T:NSManagedObject & Identifiable, V:ViewModifier>: View {
     @EnvironmentObject private var settings: Settings
     @State private var addViewIsPresented = false
     //for present the editView
     @State private var editableItem: T? = nil
     
     var items: [T]
-    let onItemTap: (NSManagedObject) -> ()
+    let onItemTap: (T) -> ()
+    let itemModifier: (T) -> (V)
     let editMenuType: EditmenuType
     let appearAddButton:Bool
     //this context shoud only be as viewContext or empty
@@ -40,8 +54,8 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
                                onDismiss: {editableItem = nil}) { item in
                             EditView(editMenuType: editMenuType, item:item, context)
                         }
-                               
-                               
+                               .modifier(itemModifier(item))
+//                               .modifier(itemModifier)
                     
                 }
                 
@@ -72,6 +86,14 @@ struct GridView<T:NSManagedObject & Identifiable>: View {
             
         }
     }
+    
+//    private var modifier: some ViewModifier {
+//        if let modifier = itemModifier {
+//            return modifier
+//        } else {
+//            return EmptyModifier() 
+//        }
+//    }
 }
 
 //#Preview {

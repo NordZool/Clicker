@@ -24,7 +24,7 @@ struct DiagramView: View {
     @EnvironmentObject private var settings: Settings
     @State private var isFilterViewPresented = false
     
-    var currentTittle: String {
+    private var currentTittle: String {
         switch settings.diagramType {
         case .clicker:
             "Clickers"
@@ -38,6 +38,7 @@ struct DiagramView: View {
     var body: some View {
         NavigationStack {
             Group {
+                
                 switch settings.diagramType {
                 case .clicker:
                     SectorView<Clicker>()

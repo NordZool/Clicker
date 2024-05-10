@@ -45,6 +45,7 @@ fileprivate struct ItemModifierPreview: View {
                 /*@START_MENU_TOKEN@*/Text("Menu Item 2")/*@END_MENU_TOKEN@*/
                 /*@START_MENU_TOKEN@*/Text("Menu Item 3")/*@END_MENU_TOKEN@*/
             })
+            .modifier(ItemModifier())
 //        VStack {
 //            //optimal range 50 <-> 180
 //            Slider(value: $settings.itemSize, in: 50...180)

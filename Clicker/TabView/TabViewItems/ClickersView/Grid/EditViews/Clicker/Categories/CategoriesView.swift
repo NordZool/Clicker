@@ -20,8 +20,8 @@ struct CategoriesView: View {
     var body: some View {
         ScrollView {
             GridView(items: clicker.typesArraySortedByDate(),
-                     onItemTap: { object in
-                self.tapOnActiveType(type: object as! ClickerType)
+                     onItemTap: { clickerType in
+                self.tapOnActiveType(type: clickerType )
                 animate.toggle()
             }, editMenuType: .clickerType, appearAddButton: false)
             
@@ -41,8 +41,8 @@ struct CategoriesView: View {
             GridView(items: notRelatedClickerTypes.filter{type in
                 !(((clicker.types as? Set<ClickerType>) ?? [])
                     .contains(where:{$0.objectID == type.objectID}))
-            }, onItemTap: {object in
-                self.tapOnUnactriveType(type: object as! ClickerType, in: clicker.managedObjectContext!)
+            }, onItemTap: {clickerType in
+                self.tapOnUnactriveType(type: clickerType , in: clicker.managedObjectContext!)
                
                 animate.toggle()
             }, editMenuType: .clickerType,

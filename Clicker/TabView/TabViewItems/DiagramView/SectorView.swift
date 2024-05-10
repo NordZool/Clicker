@@ -34,7 +34,7 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
                     }
                 }
                 
-                .frame(width: .infinity, height: 400)
+                .frame(width: 400, height: 400)
                 Divider()
                 SectorList(items:  rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
             }

@@ -20,8 +20,8 @@ struct ActiveClickersTableView: View {
         
         ScrollView {
             
-            GridView(items: clickers.map({$0}), onItemTap: { object in
-                let clicker = object as! Clicker
+            GridView(items: clickers.map({$0}), onItemTap: { clicker in
+                
                 
                    
                 clicker.timestamp = .now

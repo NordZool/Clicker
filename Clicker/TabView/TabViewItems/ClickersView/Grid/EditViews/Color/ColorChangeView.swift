@@ -44,7 +44,7 @@ struct ColorChangeView<T:Colorness>: View {
                 GridView(items: colors.map{$0}, onItemTap: { color in
                     //isolate choosen color in item context
                     let itemContext = item.managedObjectContext!
-                    let color = UserColor.copyForEdition(of: color as! UserColor, in: itemContext) 
+                    let color = UserColor.copyForEdition(of: color, in: itemContext) 
                     
                     
                     item.color = color
