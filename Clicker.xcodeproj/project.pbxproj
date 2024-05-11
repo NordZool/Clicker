@@ -43,7 +43,6 @@
 		84D438972BD93B6B00C81EE1 /* ClickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D438962BD93B6B00C81EE1 /* ClickersView.swift */; };
 		84D438992BD93F6E00C81EE1 /* ClickerTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D438982BD93F6E00C81EE1 /* ClickerTabView.swift */; };
 		84F7B6302B8F7858006A12AE /* ClickerTabViewBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B62F2B8F7858006A12AE /* ClickerTabViewBar.swift */; };
-		84F7B6322B8F7881006A12AE /* ScreensEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B6312B8F7881006A12AE /* ScreensEnum.swift */; };
 		84F7B6352B8F7E17006A12AE /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B6342B8F7E17006A12AE /* ItemView.swift */; };
 		84F7B6382B8F7EB2006A12AE /* Clicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B6372B8F7EB2006A12AE /* Clicker.swift */; };
 		84F7B63C2B8F8297006A12AE /* ClickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7B63B2B8F8297006A12AE /* ClickerView.swift */; };
@@ -92,7 +91,6 @@
 		84D438962BD93B6B00C81EE1 /* ClickersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickersView.swift; sourceTree = "<group>"; };
 		84D438982BD93F6E00C81EE1 /* ClickerTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerTabView.swift; sourceTree = "<group>"; };
 		84F7B62F2B8F7858006A12AE /* ClickerTabViewBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerTabViewBar.swift; sourceTree = "<group>"; };
-		84F7B6312B8F7881006A12AE /* ScreensEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensEnum.swift; sourceTree = "<group>"; };
 		84F7B6342B8F7E17006A12AE /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		84F7B6372B8F7EB2006A12AE /* Clicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clicker.swift; sourceTree = "<group>"; };
 		84F7B63B2B8F8297006A12AE /* ClickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickerView.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 			children = (
 				84F7B62F2B8F7858006A12AE /* ClickerTabViewBar.swift */,
 				84D438982BD93F6E00C81EE1 /* ClickerTabView.swift */,
-				84F7B6312B8F7881006A12AE /* ScreensEnum.swift */,
 				8478210A2BE26E4200B46BEF /* TabViewItems */,
 			);
 			path = TabView;
@@ -442,7 +439,6 @@
 				84F7B6382B8F7EB2006A12AE /* Clicker.swift in Sources */,
 				84131FD52BDFCF7800425AAB /* ClickersStepper.swift in Sources */,
 				842EA9C42B97686400C26AEB /* EditView.swift in Sources */,
-				84F7B6322B8F7881006A12AE /* ScreensEnum.swift in Sources */,
 				84D438972BD93B6B00C81EE1 /* ClickersView.swift in Sources */,
 				845131592BE146B500F621CE /* InactiveClickersTableView.swift in Sources */,
 				842EA9BF2B97592A00C26AEB /* GridView.swift in Sources */,
@@ -584,6 +580,7 @@
 				DEVELOPMENT_TEAM = 8FD78V4Y2V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -613,6 +610,7 @@
 				DEVELOPMENT_TEAM = 8FD78V4Y2V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -45,11 +45,6 @@ fileprivate struct PreviewClickerTabView : View {
     
     var body: some View {
             ClickerTabView()
-            //                .toolbar {
-            //                    ToolbarItem(placement: .bottomBar) {
-            //                        ClickerTabViewBar(screenInView: $selection)
-            //                    }
-            //                }
         
         .environmentObject(Settings())
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)

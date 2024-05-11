@@ -20,23 +20,22 @@ struct SettingsView: View {
             
             Form {
                 Section("APPEARANCE") {
-                    HStack{
-                        Text("Scale:")
-                        Slider(value: $settings.itemSize, in: (73.0)...(150.0),label: {Text("Scale")})
-                        
+                    VStack(alignment: .leading) {
+                        HStack{
+                            Text("Cell scale:")
+                            Slider(value: $settings.itemSize, in: (73.0)...(110.0),label: {Text("Scale")})
+                            
+                        }
+                        EmptyGridItem(label: "Example")
+                            .animation(Resourses.gridAnimation, value: settings.itemSize)
                     }
-                    EmptyGridItem(label: "Example")
-                        .animation(Resourses.gridAnimation, value: settings.itemSize)
+                    
+                    Toggle(isOn: $settings.guidance) {
+                        Text("Guidances:")
+                    }
                 }
                 
                 Section("MISC") {
-//                    Button("Colors") {
-//                        colorsIsPresented = true
-//                    }
-//                    .foregroundStyle(scheme == .light ? .black : .white)
-//                    .sheet(isPresented: $colorsIsPresented, content: {
-//                        MiscView<UserColor>(itemsType: .color)
-//                    })
                     
                     NavigationLink(destination: MiscView<UserColor>(itemsType: .color)) {
                         Text("Colors")
@@ -44,14 +43,6 @@ struct SettingsView: View {
                     NavigationLink(destination: MiscView<ClickerType>(itemsType: .clickerType)) {
                         Text("Types")
                     }
-                    
-//                    Button("Types") {
-//                        typesIsPresented = true
-//                    }
-//                    .foregroundStyle(scheme == .light ? .black : .white)
-//                    .sheet(isPresented: $typesIsPresented, content: {
-//                        MiscView<ClickerType>(itemsType: .clickerType)
-//                    })
                 }
                 
             }
@@ -62,7 +53,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+        SettingsView()
         .environmentObject(Settings())
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }

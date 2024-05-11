@@ -13,6 +13,7 @@ struct ActiveClickersTableView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Clicker.timestamp, ascending: true)],
         predicate: NSPredicate(format: "isActive == %@", NSNumber(value:true)),animation: Resourses.gridAnimation)
     private var clickers: FetchedResults<Clicker>
+    @EnvironmentObject var settings: Settings
     
     //for increase/reduce clicker operation saving
     @Environment(\.managedObjectContext) private var moc
@@ -32,25 +33,27 @@ struct ActiveClickersTableView: View {
                 }
             }, editMenuType: .clicker, appearAddButton: false)
             
-            //user's guide
-            VStack {
+            //user's guidence
+            if settings.guidance {
+                VStack {
                     if clickers.isEmpty {
-                            Text("Tap on clicker to start counting it")
-                                .font(.title2)
-                            Text("Long tap to edit")
-                                .font(.title3)
-                                .foregroundStyle(.gray)
+                        Text("Tap on clicker to start counting it")
+                            .font(.title2)
+                        Text("Long tap to edit")
+                            .font(.title3)
+                            .foregroundStyle(.gray)
                     }
-                //without 'if else' statement for best animation
+                    //without 'if else' statement for best animation
                     
-            }
-            .transaction { transaction in
-                transaction.animation = clickers.isEmpty ? Resourses.gridAnimation : nil
-            }
-            if !clickers.isEmpty {
-            Text( "Tap on clicker to stop counting it")
-                .font(.title3)
-                .foregroundStyle(.gray)
+                }
+                .transaction { transaction in
+                    transaction.animation = clickers.isEmpty ? Resourses.gridAnimation : nil
+                }
+                if !clickers.isEmpty {
+                    Text( "Tap on clicker to stop counting it")
+                        .font(.title3)
+                        .foregroundStyle(.gray)
+                }
             }
             
         }

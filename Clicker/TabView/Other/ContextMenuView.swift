@@ -26,10 +26,10 @@ struct ContextMenuView<T:NSManagedObject>: View {
             //isolate object in viewContext for
             //not disturbe any other contexts
             let item = Functions.copyForEdition(of: item, in: moc)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     moc.delete(item)
             }
-            
             try! moc.save()
         } label: {
             Label("Delete", systemImage:"trash")

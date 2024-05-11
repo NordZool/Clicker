@@ -9,21 +9,20 @@ import SwiftUI
 import CoreData
 
 struct DiagramFilterView: View {
-    //    @FetchRequest(sortDescriptors: []) var items: FetchedResults<T>
     
     @Binding var diagramType: EditmenuType
     var body: some View {
         VStack {
+            
             switch diagramType {
             case .clicker:
                 DiagramFilterItemsView<Clicker>(itemsType: diagramType)
             case .clickerType:
-//                DiagramFilterItemsView<ClickerType>(itemsType: diagramType)
-                Text("Test")
+                DiagramFilterItemsView<ClickerType>(itemsType: diagramType)
             default:
                 Text("Error")
             }
-            Picker(selection: $diagramType) {
+            Picker(selection: $diagramType.animation(.linear)) {
                 //drop .color (not supportes)
                 ForEach(EditmenuType.allCases.dropLast(1), id:\.self) {type in
                     Text(typeTyString(type))
@@ -32,6 +31,7 @@ struct DiagramFilterView: View {
                 Text(typeTyString(diagramType))
             }
             .pickerStyle(.segmented)
+            
         }
         
     }
@@ -50,29 +50,47 @@ struct DiagramFilterView: View {
 
 
 struct DiagramFilterItemsView<T:DiagramAvaliable> : View {
-    @FetchRequest(sortDescriptors: []) var items: FetchedResults<T>
+    @FetchRequest(sortDescriptors: [], animation: Resourses.gridAnimation) var items: FetchedResults<T>
+    @EnvironmentObject var settings: Settings
     let itemsType: EditmenuType
     
     var body: some View {
-        GridView(
-            items: items.sorted(by: {($0.amount > $1.amount)}),
-            onItemTap: {item in
-                item.isActiveOnDiagram.toggle()
-            },itemModifier: {item in
-                DiagramItemModifier(isActiveOnDiagram: item.isActiveOnDiagram)
-            },
-            editMenuType: itemsType,
-            appearAddButton: false)
+        ScrollView {
+            
+            if settings.guidance {
+                Text("Tap to hide a cell from the chart")
+                    .font(.title3)
+                    .foregroundStyle(.gray)
+                    .padding(.top, 15)
+            }
+            
+            GridView(
+                items: items.sorted(by: {($0.amount > $1.amount)}),
+                onItemTap: {item in
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        item.isActiveOnDiagram.toggle()
+                        let context = item.managedObjectContext
+                        try! context?.save()
+                    }
+                    
+                },itemModifier: {item in
+                    DiagramItemModifier(item: item)
+                },
+                editMenuType: itemsType,
+                appearAddButton: false)
+        }
     }
     
     struct DiagramItemModifier :ViewModifier{
-        var isActiveOnDiagram: Bool
+        @ObservedObject var item: T
         
         func body(content: Content) -> some View {
             content
-                .opacity(isActiveOnDiagram ? 1 : 0.5)
+                .opacity(item.isActiveOnDiagram ? 1 : 0.15)
         }
     }
+    
+    
 }
 
 
