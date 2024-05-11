@@ -41,32 +41,48 @@ struct ColorChangeView<T:Colorness>: View {
                 }
                 Divider()
                 
-                GridView(items: colors.map{$0}, onItemTap: { color in
+                GridView(
+                    items: colors.map{$0},
+                    onItemTap: { color in
                     //isolate choosen color in item context
                     let itemContext = item.managedObjectContext!
                     let color = UserColor.copyForEdition(of: color, in: itemContext) 
-                    
-                    
+
                     item.color = color
-                }, editMenuType: .color,
+                    },itemModifier: {color in
+                        SelectedColorModifier(userColor: color, selectedColor: $item.color)
+                    },
+                    editMenuType: .color,
                          appearAddButton: true)
             }
         }
-        //        .onDisappear(perform: {
-        //            do {
-        //                try context.save()
-        //            } catch {
-        //                print("Error in colorChangeView")
-        //            }
-        //        })
+    }
+    
+    struct SelectedColorModifier : ViewModifier {
+        var userColor: UserColor?
+        @Binding var selectedColor: UserColor?
+        
+        func body(content: Content) -> some View {
+            content
+                .overlay(alignment: .topTrailing) {
+                    //"userColor == selectedColor" is always = "false" in real environment,
+                    //becouse they exist in different contexts. So I use "objectID" instead ☺️.
+                    if userColor?.objectID == selectedColor?.objectID {
+                            Image(systemName: "checkmark.circle.fill")
+                                .offset(x:-8,y:8)
+                    }
+            }
+                .foregroundStyle(userColor?.objectID == selectedColor?.objectID ? .blue : .primary)
+
+        }
     }
 }
 
-//#Preview {
-//    let persistence = PersistenceController.shared
-//    let clicker = Clicker.oneClicker(context: persistence.container.viewContext)
-//    
-//    return ColorChangeView( item: clicker)
-//        .environment(\.managedObjectContext, persistence.container.viewContext)
-//        .environmentObject(Settings())
-//}
+#Preview {
+    let persistence = PersistenceController.shared
+    let clicker = Clicker.oneClicker(context: persistence.container.viewContext)
+    
+    return ColorChangeView( item: clicker)
+        .environment(\.managedObjectContext, persistence.container.viewContext)
+        .environmentObject(Settings())
+}

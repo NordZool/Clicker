@@ -18,7 +18,7 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
     //sortDescriptors or predicates. Thus items sorted and
     //filtered when I use these.
     @FetchRequest(sortDescriptors: []) private var rawItems: FetchedResults<T>
-    
+    @EnvironmentObject private var settings: Settings
     
     var body: some View {
         ScrollView {
@@ -36,6 +36,13 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
                 
                 .frame(width: 400, height: 400)
                 Divider()
+                //guidence
+                if settings.guidance {
+                    Text("Tap on a row to see details")
+                        .font(.title3)
+                        .foregroundStyle(.gray)
+                }
+                
                 SectorList(items:  rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
             }
          }

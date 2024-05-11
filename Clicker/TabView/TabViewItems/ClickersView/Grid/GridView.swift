@@ -42,6 +42,7 @@ struct GridView<T:NSManagedObject & Identifiable, V:ViewModifier>: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: settings.itemSize, maximum: settings.itemSize),spacing: 10)], content: {
                 ForEach(items) {item in
                     ItemView(item: item)
+                        .modifier(itemModifier(item))
                         .onTapGesture {
                             self.onItemTap(item)
                         }
@@ -54,7 +55,7 @@ struct GridView<T:NSManagedObject & Identifiable, V:ViewModifier>: View {
                                onDismiss: {editableItem = nil}) { item in
                             EditView(editMenuType: editMenuType, item:item, context)
                         }
-                               .modifier(itemModifier(item))
+                               
 //                               .modifier(itemModifier)
                     
                 }
@@ -96,14 +97,14 @@ struct GridView<T:NSManagedObject & Identifiable, V:ViewModifier>: View {
 //    }
 }
 
-//#Preview {
-//    let persistence = PersistenceController.shared
-//    let context = persistence.container.viewContext
-//    return GridView(
-//        items: try! context.fetch(Clicker.fetchRequest()),
-//        onItemTap: {_ in
-//        }, editMenuType: .clicker, appearAddButton: true)
-//    
-//    .environment(\.managedObjectContext, context)
-//    .environmentObject(Settings())
-//}
+#Preview {
+    let persistence = PersistenceController.shared
+    let context = persistence.container.viewContext
+    return GridView(
+        items: try! context.fetch(Clicker.fetchRequest()),
+        onItemTap: {_ in
+        }, editMenuType: .clicker, appearAddButton: true)
+    
+    .environment(\.managedObjectContext, context)
+    .environmentObject(Settings())
+}

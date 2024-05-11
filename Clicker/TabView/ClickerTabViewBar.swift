@@ -21,6 +21,7 @@ struct ClickerTabViewBar: View {
                     } label: {
                         Image(systemName: screenEnumCase.rawValue)
                     }
+                    .buttonStyle(.plain)
                     .foregroundStyle(screenInView == screenEnumCase ? Color.primary : .secondary)
                     .scaleEffect(screenInView == screenEnumCase ? 1.8 : 1.5)
                     
@@ -29,6 +30,15 @@ struct ClickerTabViewBar: View {
             }
     }
 }
+
+//rawValue = "systemImageString"
+//Codable only for save 'currentScreen' value in 'Settings'
+enum ScreensEnum : String, CaseIterable, Codable{
+    case clickers = "list.bullet"
+    case graphic = "circle.filled.pattern.diagonalline.rectangle"
+    case settings = "gearshape.fill"
+}
+
 
 //only for preview
 fileprivate struct PreviewClickerTabView : View {

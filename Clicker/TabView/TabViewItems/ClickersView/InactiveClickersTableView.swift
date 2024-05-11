@@ -15,8 +15,7 @@ struct InactiveClickersTableView: View {
     private var clickers: FetchedResults<Clicker>
     
     var body: some View {
-        GridView(items: clickers.map({$0}), onItemTap: { object in
-            let clicker = object as! Clicker
+        GridView(items: clickers.map({$0}), onItemTap: { clicker in
             clicker.timestamp = .now
             clicker.isActive = true
             
