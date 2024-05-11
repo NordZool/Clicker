@@ -34,8 +34,8 @@ struct ClickerTabViewBar: View {
 //rawValue = "systemImageString"
 //Codable only for save 'currentScreen' value in 'Settings'
 enum ScreensEnum : String, CaseIterable, Codable{
-    case clickers = "list.bullet"
-    case graphic = "circle.filled.pattern.diagonalline.rectangle"
+    case clickers = "minus.forwardslash.plus"
+    case graphic = "chart.pie.fill"
     case settings = "gearshape.fill"
 }
 

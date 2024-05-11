@@ -17,11 +17,8 @@ struct ClickerTabView: View {
                     Group {
                         ClickersView()
                             .tag(ScreensEnum.clickers)
-                        
-                       
                         DiagramView()
                             .tag(ScreensEnum.graphic)
-                        
                         SettingsView()
                             .tag(ScreensEnum.settings)
                     }
