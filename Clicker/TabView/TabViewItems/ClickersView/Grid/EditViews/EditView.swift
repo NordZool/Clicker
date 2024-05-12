@@ -56,6 +56,8 @@ struct EditView<T:NSManagedObject>: View {
                     
                 }
             }
+            .submitLabel(.done)
+            .scrollDisabled(true)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     
@@ -96,8 +98,7 @@ struct EditView<T:NSManagedObject>: View {
 }
 
 #Preview {
-    //говно не тестится, если не использовать общий персистенс
-    //    let persistence = PersistenceController(inMemory: true)
+   //    let persistence = PersistenceController(inMemory: true)
     let persistence = PersistenceController.shared
     let context = persistence.container.viewContext
     return EditView(editMenuType: .clicker,nil)

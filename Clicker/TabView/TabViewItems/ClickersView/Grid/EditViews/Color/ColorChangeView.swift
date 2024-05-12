@@ -12,7 +12,7 @@ import CoreData
 struct ColorChangeView<T:Colorness>: View {
     @ObservedObject var item: T
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: false)])
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "timestamp", ascending: false)], animation: Resourses.gridAnimation)
     private var colors: FetchedResults<UserColor>
     //used only for case, where item.color = nil
     @EnvironmentObject private var settings: Settings
