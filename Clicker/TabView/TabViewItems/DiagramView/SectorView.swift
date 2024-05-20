@@ -27,7 +27,7 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
                     .font(.title)
                     .foregroundStyle(.gray)
             } else {
-                VStack {
+                LazyVStack {
                     Chart {
                         ForEach(rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount})) {item in
                             if item.amount >= 0 {
@@ -52,17 +52,7 @@ struct SectorView<T: DiagramAvaliable & Colorness>: View {
                     
                     SectorList(items:  rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
                 }
-                
-                .frame(width: 400, height: 400)
-                Divider()
-                //guidence
-                if settings.guidance {
-                    Text("Tap on a row to see details")
-                        .font(.title3)
-                        .foregroundStyle(.gray)
-                }
-                
-                SectorList(items:  rawItems.filter({$0.isActiveOnDiagram}).sorted(by: {$0.amount > $1.amount}))
+ 
             }
         }
     }
